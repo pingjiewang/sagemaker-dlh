@@ -1,0 +1,13 @@
+conda create -n test_dlh python=2.7
+
+conda activate test_dlh
+
+conda install PyTorch=1.3.1 
+
+conda install Numpy=1.16.6
+
+conda install Scikit-learn
+
+conda install -c rdkit rdkit
+
+conda remove -n test_dlh -all
