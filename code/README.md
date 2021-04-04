@@ -7,8 +7,9 @@ To run training on a small subset of data (1000 training pairs/SMILES) do the fo
 1. Install all dependencies
 2. `export PYTHONPATH=/your/path/sagemaker-dlh/code/graph2graph`
 3. in `diff_vae/`
+    * `>bash preprocess_small.sh`
+4. in `diff_vae/`
     * `>bash train_small.sh`
-    * Note: I have already run the preprocessing script to generate the preprocessed data in `../data_small/`
 
 ## Training on real dataset
 
@@ -24,10 +25,11 @@ Now run the following steps:
 1. Install all dependencies
 2. `export PYTHONPATH=/your/path/sagemaker-dlh/code/graph2graph`
 3. in `diff_vae/`
+    * `>bash preprocess.sh`
+4. in `diff_vae/`
     * `>bash train.sh`
-    * Note: I have already run the preprocessing script to generate the preprocessed data in `../data/`
 
-The output should look something like the following (with some additional warnings that were removed for clarity):
+The output for training the small dataset should look something like the following (with some additional warnings that were removed for clarity):
 
 ```
 running training on logp06
