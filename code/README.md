@@ -11,23 +11,6 @@ To run training on a small subset of data (1000 training pairs/SMILES) do the fo
 4. in `diff_vae/`
     * `>bash train_small.sh`
 
-## Training on real dataset
-
-To train on the real dataset (assuming you are using GPU) first modify the code:
-
-- `decode.py:41:#model = DiffVAE(vocab, args).cuda()`
-    * uncomment this line and comment the line above. Here we activate GPU acceleration with cuda()
-- `vae_train.py:47:#model = DiffVAE(vocab, args).cuda()`
-    * do the same as above
-
-Now run the following steps:
-
-1. Install all dependencies
-2. `export PYTHONPATH=/your/path/sagemaker-dlh/code/graph2graph`
-3. in `diff_vae/`
-    * `>bash preprocess.sh`
-4. in `diff_vae/`
-    * `>bash train.sh`
 
 The output for training the small dataset should look something like the following (with some additional warnings that were removed for clarity):
 
@@ -50,6 +33,25 @@ running training on logp04
 ```
 
 It should then save the trained models in `newmodels_small/` directory (after each epoch)
+
+## Training on real dataset (with GPU)
+
+To train on the real dataset (assuming you are using GPU) first modify the code:
+
+- `decode.py:41:#model = DiffVAE(vocab, args).cuda()`
+    * uncomment this line and comment the line above. Here we activate GPU acceleration with cuda()
+- `vae_train.py:47:#model = DiffVAE(vocab, args).cuda()`
+    * do the same as above
+
+Now run the following steps:
+
+1. Install all dependencies
+2. `export PYTHONPATH=/your/path/sagemaker-dlh/code/graph2graph`
+3. in `diff_vae/`
+    * `>bash preprocess.sh`
+4. in `diff_vae/`
+    * `>bash train.sh`
+
 
 
 
