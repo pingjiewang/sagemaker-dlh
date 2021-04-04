@@ -15,9 +15,9 @@ To run training on a small subset of data (1000 training pairs/SMILES) do the fo
 
 To train on the real dataset (assuming you are using GPU) first modify the code:
 
-- decode.py:41:#model = DiffVAE(vocab, args).cuda()
+- `decode.py:41:#model = DiffVAE(vocab, args).cuda()`
     * uncomment this line and comment the line above. Here we activate GPU acceleration with cuda()
-- vae_train.py:47:#model = DiffVAE(vocab, args).cuda()
+- `vae_train.py:47:#model = DiffVAE(vocab, args).cuda()`
     * do the same as above
 
 Now run the following steps:
