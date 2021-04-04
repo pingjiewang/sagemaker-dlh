@@ -1,0 +1,10 @@
+Namespace(anneal_rate=0.8, batch_size=32, beta=1.0, clip_norm=50.0, depthG=3, depthT=6, epoch=2, hidden_size=330, load_epoch=-1, lr=0.001, rand_size=8, save_dir='newmodels_small/logp04', share_embedding=True, train='../data_small/logp04/processed/', use_molatt=False, vocab='../data_small/logp04/vocab.txt')
+Model #Params: 3740K
+KL: 0.02, Word: 22.55, Topo: 71.06, Assm: 55.62, PNorm: 95.59, GNorm: 33.28
+finished training epoch 1 of 2
+training time (s) of epoch: 121.716845989
+learning rate: 0.000800
+KL: 0.03, Word: 29.21, Topo: 88.20, Assm: 63.51, PNorm: 96.76, GNorm: 34.24
+finished training epoch 2 of 2
+training time (s) of epoch: 120.880948067
+learning rate: 0.000640
