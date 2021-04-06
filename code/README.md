@@ -15,10 +15,18 @@
 
 # JTNN
 
-## TODO
+## Training on Real Dataset (GPU)
 
-Write tutorial on training (for now see molopt README).
+Run the following steps:
 
+1. Install all dependencies
+2. `export PYTHONPATH=/your/path/sagemaker-dlh/code/jtnn`
+3. in `molopt/`
+    * `>bash pretrain.sh`
+4. in `molopt/`
+    * `>bash train.sh`
+
+(See `molopt/README.md` for more detail.)
 
 # Graph2Graph
 
