@@ -1,13 +1,36 @@
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.8.4
+  latest version: 4.9.2
+
+conda update -n base -c defaults conda
+
+#create a new enviroment
 conda create -n test_dlh python=2.7
 
+#activiate
 conda activate test_dlh
 
-conda install PyTorch=1.3.1 
 
-conda install Numpy=1.16.6
+#package installation
+conda install -y PyTorch=1.3.1 
 
-conda install Scikit-learn
+conda install -y Numpy=1.16.6
+
+conda install -y Scikit-learn
 
 conda install -c rdkit rdkit
 
 conda remove -n test_dlh -all
+
+
+
+export PYTHONPATH=/Users/pjwang/all_uiuc/iclr19-graph2graph
+
+python ./scripts/preprocess.py --train ./data/logp04/train_pairs.txt --ncpu 4
+
+
+git clone https://github.com/wengong-jin/iclr19-graph2graph
+
+
+
+

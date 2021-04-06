@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+echo "Hello World! I am ubtu 2" > ~ubuntu/temp.log
+date >> ~ubuntu/temp.log
+whoami >> ~ubuntu/temp.log
+
+su ubuntu -c 'whoami >~ubuntu/temp0.log'
+
+echo "shutting down in 240 seconds" >> ~ubuntu/temp.log
+sleep 180
+shutdown now
+
+

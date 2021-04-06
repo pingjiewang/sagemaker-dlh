@@ -1,0 +1,7 @@
+## Training on small dataset
+### setup
+export PYTHONPATH=~/sagemaker-dlh/code/graph2graph
+cd $PYTHONPATH/diff_vae
+
+
+
