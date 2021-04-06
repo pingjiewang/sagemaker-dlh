@@ -67,6 +67,8 @@ PRINT_ITER = 20
 param_norm = lambda m: math.sqrt(sum([p.norm().item() ** 2 for p in m.parameters()]))
 grad_norm = lambda m: math.sqrt(sum([p.grad.norm().item() ** 2 for p in m.parameters() if p.grad is not None]))
 
+total_time = 0
+
 for epoch in xrange(args.load_epoch + 1, args.epoch):
     loader = PairTreeFolder(args.train, vocab, args.batch_size, num_workers=4)
     meters = np.zeros(4)
@@ -96,10 +98,14 @@ for epoch in xrange(args.load_epoch + 1, args.epoch):
     scheduler.step()
 
     end_time = time.time()
+    total_time += (end_time-start_time)
 
     print "finished training epoch " + str(epoch+1) + " of " + str(args.epoch)
     print "training time (s) of epoch: "+ str(end_time-start_time)
+    print "total time (s): " + str(total_time)
+
     print "learning rate: %.6f" % scheduler.get_lr()[0]
     if args.save_dir is not None:
         torch.save(model.state_dict(), args.save_dir + "/model.iter-" + str(epoch))
-
+print "Finished!"
+print "total time (s): " + str(total_time)

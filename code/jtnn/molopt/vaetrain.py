@@ -11,6 +11,7 @@ from collections import deque
 
 from jtnn import *
 import rdkit
+import time
 
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
@@ -63,9 +64,12 @@ dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_worker
 MAX_EPOCH = 6
 PRINT_ITER = 20
 
+total_time = 0
+
 for epoch in xrange(MAX_EPOCH):
     word_acc,topo_acc,assm_acc,steo_acc,prop_acc = 0,0,0,0,0
 
+    start_time = time.time()
     for it, batch in enumerate(dataloader):
         for mol_tree,_ in batch:
             for node in mol_tree.nodes:
@@ -101,6 +105,14 @@ for epoch in xrange(MAX_EPOCH):
             torch.save(model.state_dict(), opts.save_path + "/model.iter-%d-%d" % (epoch, it + 1))
 
     scheduler.step()
+
+    end_time = time.time()
+    total_time += (end_time-start_time)
+    print "finished training epoch " + str(epoch+1) + " of " + str(MAX_EPOCH)
+    print "training time (s) of epoch: "+ str(end_time-start_time)
+    print "total time (s): " + str(total_time)
+
     print "learning rate: %.6f" % scheduler.get_lr()[0]
     torch.save(model.state_dict(), opts.save_path + "/model.iter-" + str(epoch))
-
+print "Finished!"
+print "total time (s): " + str(total_time)
