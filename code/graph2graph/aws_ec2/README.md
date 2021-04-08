@@ -18,6 +18,9 @@ Default output format [None]: json
 ## Step 3 (Optional)- install private key for ssh login
 This is needed only if you want to ssh into the training EC2 instance, which has been setup using key pair named 'dlh-group-pair'
 
+- Step 1: set up SSH locally https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- Step 2: to add your info into github https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 ```
 mv dlh-group-pair.pem ~/.ssh
 chmod 400 ~/.ssh/dlh-group-pair.pem
@@ -58,3 +61,13 @@ The startup bootstrap script will perform the following:
 
 - Need to copy training input data from S3://input-data-drug-r-us to the instance file system.
 - Replace train_tiny.sh script with the actual training script.
+
+## To get your access ID and the secret key:
+- Go to  IAM service by clicking: https://console.aws.amazon.com/iam/home?#/users
+- Under “IAM resources”, click on “Users:3"
+- Click on your user name.
+- Select the tab “Security credentials.”
+- Click on the button “Create Access Key”
+- Download .csv file
+
+Note: Please be sure to keep the key safe and secure. Don’t commit to Github nor email it to yourself or anyone.
