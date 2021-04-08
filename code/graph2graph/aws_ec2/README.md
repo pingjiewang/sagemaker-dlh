@@ -5,7 +5,7 @@
 https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 ```
 
-## Step 2 - Follow the instruction to configure it
+## Step 2 - Follow the instruction to configure the AWSCLI
 ```
 $ aws configure
 

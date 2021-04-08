@@ -1,12 +1,12 @@
-test: test_large
+test: train_cpu
 
-test_gpu:
+train_gpu:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
 		--instance-type g4dn.xlarge \
 		--user-data file://run_script.txt
 
-test_large:
+train_cpu:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
 		--instance-type t3.large \
