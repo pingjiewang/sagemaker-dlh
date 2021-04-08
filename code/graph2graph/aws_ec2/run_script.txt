@@ -1,27 +1,28 @@
 #!/bin/bash
 
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-file_run_log=$current_time-run.log
+file_run_log=graph2graph_$current_time-run.log
 
 su -l ubuntu -c '
 #
-file_name="output1"
+
+file_name="train"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-echo "Current Time : $current_time"
-export new_fileName=$current_time-$file_name.log
-echo "New FileName: " "$new_fileName"
-whoami > $new_fileName
-echo "shutting down in 240 seconds" >> $new_fileName
-#conda activate test_dlh
+
+export file_train_log=$file_name-$current_time.log
+
 export PYTHONPATH=~/sagemaker-dlh/code/graph2graph
 cd ~/sagemaker-dlh/code/graph2graph/diff_vae
 
-echo "----start conda activate ----" >> $new_fileName 2>&1
-#source ~/.bashrc >> $new_fileName 2>&1
-source activate test_dlh >> $new_fileName 2>&1
-echo "----start source train_tiny.sh ----" >> $new_fileName 2>&1
-source train_tiny.sh >> $new_fileName 2>&1
-aws s3 cp $new_fileName s3://output-data-drug-r-us
+source activate test_dlh >> $file_train_log 2>&1
+source train_tiny.sh >> $file_train_log 2>&1
+
+folder_name="trained_models_"$current_time
+#echo $folder_name
+aws s3 cp $file_train_log s3://output-data-drug-r-us/graph2graph/$folder_name/
+aws s3 cp --recursive ./newmodels_small s3://output-data-drug-r-us/graph2graph/$folder_name/
+
+#aws s3 cp --recursive ./*models* s3://output-data-drug-r-us/graph2graph/$folder_name/
 #
 '  >> $file_run_log 2>&1
 
