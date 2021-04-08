@@ -28,6 +28,7 @@ parser.add_option("-l", "--latent", dest="latent_size", default=56)
 parser.add_option("-d", "--depth", dest="depth", default=3)
 parser.add_option("-z", "--beta", dest="beta", default=1.0)
 parser.add_option("-q", "--lr", dest="lr", default=1e-3)
+parser.add_option("--epoch", dest="epoch", default=3)
 opts,args = parser.parse_args()
    
 vocab = [x.strip("\r\n ") for x in open(opts.vocab_path)] 
@@ -61,7 +62,7 @@ scheduler.step()
 dataset = PropDataset(opts.train_path, opts.prop_path)
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4, collate_fn=lambda x:x, drop_last=True)
 
-MAX_EPOCH = 6
+MAX_EPOCH = int(opts.epoch)
 PRINT_ITER = 20
 
 total_time = 0
