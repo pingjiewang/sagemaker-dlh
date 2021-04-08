@@ -56,10 +56,11 @@ The startup bootstrap script will perform the following:
 - Replace train_tiny.sh script with the actual training script.
 
 ## To get your access ID and the secret key:
-Go to  IAM service by clicking: https://console.aws.amazon.com/iam/home?#/users
-Under “IAM resources”, click on “Users:3"
-Click on your user name.
-Select the tab “Security credentials.”
-Click on the button “Create Access Key”
-Download .csv file
-Please be sure to keep the key safe and secure. Don’t commit to Github nor email it to yourself or anyone.
+- Go to  IAM service by clicking: https://console.aws.amazon.com/iam/home?#/users
+- Under “IAM resources”, click on “Users:3"
+- Click on your user name.
+- Select the tab “Security credentials.”
+- Click on the button “Create Access Key”
+- Download .csv file
+
+Note: Please be sure to keep the key safe and secure. Don’t commit to Github nor email it to yourself or anyone.
