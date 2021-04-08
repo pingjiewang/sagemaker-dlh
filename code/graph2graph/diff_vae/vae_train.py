@@ -44,9 +44,11 @@ print args
 vocab = [x.strip("\r\n ") for x in open(args.vocab)] 
 vocab = Vocab(vocab)
 
-model = DiffVAE(vocab, args)
-#model = DiffVAE(vocab, args).cuda()
-
+model=None
+if torch.cuda.is_available():
+    model = DiffVAE(vocab, args).cuda()
+else:
+    model = DiffVAE(vocab, args)
 
 for param in model.parameters():
     if param.dim() == 1:

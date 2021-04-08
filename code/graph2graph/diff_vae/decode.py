@@ -37,8 +37,15 @@ args = parser.parse_args()
 vocab = [x.strip("\r\n ") for x in open(args.vocab)] 
 vocab = Vocab(vocab)
 
-model = DiffVAE(vocab, args)
+#model = DiffVAE(vocab, args)
 #model = DiffVAE(vocab, args).cuda()
+
+model=None
+if torch.cuda.is_available():
+    model = DiffVAE(vocab, args).cuda()
+else:
+    model = DiffVAE(vocab, args)
+
 model.load_state_dict(torch.load(args.model))
 
 with open(args.test) as f:
