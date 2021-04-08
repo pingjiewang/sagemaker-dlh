@@ -18,8 +18,9 @@ Default output format [None]: json
 ## Step 3 (Optional)- install private key for ssh login
 This is needed only if you want to ssh into the training EC2 instance, which has been setup using key pair named 'dlh-group-pair'
 
--Step 1: set up SSH locally https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
--Step 2: to add your info into github https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+- Step 1: set up SSH locally https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- Step 2: to add your info into github https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 ```
 mv dlh-group-pair.pem ~/.ssh
 chmod 400 ~/.ssh/dlh-group-pair.pem
