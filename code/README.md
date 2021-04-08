@@ -83,7 +83,15 @@ Now run the following steps:
     * `>bash train.sh`
 
 
+# HierVAE
 
 
+## Training on real dataset (with GPU)
 
+Now run the following steps:
+
+1. Install all dependencies
+2. pip install .
+3. `>bash preprocess.sh`
+4. `>bash train.sh`
 
