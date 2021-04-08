@@ -8,7 +8,7 @@ python vae_train.py --train ../data_small/logp06/processed/ --vocab ../data_smal
 # logp04
 mkdir -p newmodels_small/logp04
 echo "running training on logp04"
-python vae_train.py --train ../data_small/logp04/processed/ --vocab ../data_small/logp04/vocab.txt --save_dir newmodels_small/logp04 --hidden_size 330 --rand_size 8 --anneal_rate 0.8 --epoch 2 --share_embedding | tee newmodels_small/logp04/LOG
+python vae_train.py --train ../data_small/logp04/processed/ --vocab ../data_small/logp04/vocab.txt --save_dir newmodels_small/logp04 --hidden_size 300 --rand_size 8 --anneal_rate 0.8 --epoch 2 --share_embedding | tee newmodels_small/logp04/LOG
 
 # QED 
 mkdir -p newmodels_small/qed
