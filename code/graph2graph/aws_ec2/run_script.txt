@@ -1,32 +1,29 @@
 #!/bin/bash
 
-echo "Hello World! I am ubtu 2" > ~ubuntu/temp.log
-date >> ~ubuntu/temp.log
-whoami >> ~ubuntu/temp.log
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+file_run_log=$current_time-run.log
 
 su -l ubuntu -c '
-
-file_name="output"
+#
+file_name="output1"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 echo "Current Time : $current_time"
-new_fileName=$current_time-$file_name.log
+export new_fileName=$current_time-$file_name.log
 echo "New FileName: " "$new_fileName"
-
 whoami > $new_fileName
 echo "shutting down in 240 seconds" >> $new_fileName
-
-conda activate test_dlh
-
+#conda activate test_dlh
 export PYTHONPATH=~/sagemaker-dlh/code/graph2graph
-
 cd ~/sagemaker-dlh/code/graph2graph/diff_vae
 
-./train_tiny.sh >>$new_fileName 2>&1
-
+echo "----start conda activate ----" >> $new_fileName 2>&1
+#source ~/.bashrc >> $new_fileName 2>&1
+source activate test_dlh >> $new_fileName 2>&1
+echo "----start source train_tiny.sh ----" >> $new_fileName 2>&1
+source train_tiny.sh >> $new_fileName 2>&1
 aws s3 cp $new_fileName s3://output-data-drug-r-us
+#
+'  >> $file_run_log 2>&1
 
-'
-whoami >>~ubuntu/temp0.log
-
-#sleep 60
-#shutdown now
+aws s3 cp $file_run_log s3://output-data-drug-r-us
+shutdown now
