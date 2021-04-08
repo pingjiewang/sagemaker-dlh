@@ -50,7 +50,11 @@ The startup bootstrap script will perform the following:
 
 ## Current issue (pending resolution)
 
-- Unable to run GPU training yet, due to pending G Instance type Quota increase (expected to be resolved by 4/8/2021 afternoon)
+- Unable to run GPU training yet, due to pending G Instance type Quota increase (**RESOLVED as of 4/8/2021 9am EDT**)
+
+- Make diff-vae to use CUDA calls when GPU is avaiable. We commented CUDA call out before to be able to run on CPU
+
 - Need to copy training output data to s3://output-data-drug-r-us. Currently, only log files are copied.
+
 - Need to copy training input data from S3://input-data-drug-r-us to the instance file system.
 - Replace train_tiny.sh script with the actual training script.
