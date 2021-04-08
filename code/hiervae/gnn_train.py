@@ -10,6 +10,7 @@ import argparse
 
 from hgraph import *
 import rdkit
+import time
 
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
@@ -82,6 +83,7 @@ meters = np.zeros(6)
 for epoch in range(args.load_epoch + 1, args.epoch):
     dataset = DataFolder(args.train, args.batch_size)
 
+    start_time = time.time()
     for batch in dataset:
         total_step += 1
         batch = batch + (beta,)
@@ -111,3 +113,12 @@ for epoch in range(args.load_epoch + 1, args.epoch):
         torch.save(model.state_dict(), args.save_dir + "/model." + str(epoch))
         scheduler.step()
         print("learning rate: %.6f" % scheduler.get_lr()[0])
+
+    end_time = time.time()
+    total_time += (end_time-start_time)
+
+    print("finished training epoch " + str(epoch+1) + " of " + str(args.epoch))
+    print("training time (s) of epoch: "+ str(end_time-start_time))
+    print("total time (s): " + str(total_time))
+print "Finished!"
+print "total time (s): " + str(total_time)
