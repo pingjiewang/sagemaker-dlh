@@ -44,3 +44,9 @@ git push --- to push the local changes to the git repository
 git status   ----------- list the new changed files
 
 git commit -m " comment" file_1 file_2
+
+# SSH to git
+
+- Step 1: set up SSH locally https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- Step 2: to add your info into github https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
