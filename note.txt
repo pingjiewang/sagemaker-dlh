@@ -18,7 +18,10 @@ conda install -y Numpy=1.16.6
 
 conda install -y Scikit-learn
 
-conda install -c rdkit rdkit
+conda install -y -c rdkit rdkit
+
+
+
 
 conda remove -n test_dlh -all
 
@@ -29,8 +32,14 @@ export PYTHONPATH=/Users/pjwang/all_uiuc/iclr19-graph2graph
 python ./scripts/preprocess.py --train ./data/logp04/train_pairs.txt --ncpu 4
 
 
-git clone https://github.com/wengong-jin/iclr19-graph2graph
+git clone https://github.com/pingjiewang/sagemaker-dlh.git
+
+ ssh -i ~/.ssh/"dlh-group-pair.pem" ubuntu@ec2-3-137-41-32.us-east-2.compute.amazonaws.com
 
 
 
+ssh -i ~/.ssh/"dlh-group-pair.pem" ubuntu@ec2-3-139-236-250.us-east-2.compute.amazonaws.com
+
+`make -f ~/sagemaker-dlh/Makefile`
+cd ~/sagemaker-dlh/code/diff_vae
 

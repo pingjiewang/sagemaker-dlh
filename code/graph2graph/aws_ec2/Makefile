@@ -2,8 +2,7 @@ test:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
 		--instance-type t3.medium \
-		--user-data file://run_script.txt
-
+#		--user-data file://run_script.txt
 
 
 train_gpu:
@@ -19,14 +18,13 @@ train_cpu:
 		--user-data file://run_script.txt
 
 
-
 start_clean:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
 		--instance-type t2.small 
 
 
-sync-log:
+sync:
 	aws s3 sync s3://output-data-drug-r-us ~/tmp/output-data-drug-r-us
 
 sync-model:
