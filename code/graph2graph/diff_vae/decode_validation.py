@@ -49,16 +49,7 @@ else:
     state_dict = torch.load(args.model, map_location='cpu')
 
 
-from collections import OrderedDict
-new_state_dict = OrderedDict()
-
-for k, v in state_dict.items():
-    if k == 'embedding.weight':
-        continue
-    else:
-        new_state_dict[k] = v
-    new_state_dict[k] = v
-model.load_state_dict(new_state_dict)
+model.load_state_dict(state_dict)
 
 #model.load_state_dict(torch.load(args.model))
 
