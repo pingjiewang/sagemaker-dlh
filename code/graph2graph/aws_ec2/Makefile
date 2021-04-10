@@ -21,7 +21,7 @@ train_cpu:
 start_clean:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
-		--instance-type t2.small 
+		--instance-type t2.medium 
 
 
 sync:
