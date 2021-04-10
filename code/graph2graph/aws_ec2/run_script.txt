@@ -1,15 +1,17 @@
 #!/bin/bash
 
-#timedatectl set-timezone America/New_York
+#set EST time format
+timedatectl set-timezone America/New_York
 
 start_time=" [start-time]: "$(date)
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 file_run_log=graph2graph_$current_time-run.log
 
 #Log a special remark
-#echo "Remark:" >> $file_run_log 2>&1
-#echo "Test training graph2graph!" >> $file_run_log 2>&1
-#echo "" >> $file_run_log 2>&1
+echo "Remark: " >> $file_run_log 2>&1
+#echo "training diff_vae - 1 of 4, 20 epoch!" >> $file_run_log 2>&1
+echo "Train_tiny.sh !" >> $file_run_log 2>&1
+echo "" >> $file_run_log 2>&1
 
 su -l ubuntu -c '
 #
@@ -25,21 +27,23 @@ cd ~/sagemaker-dlh/code/graph2graph/diff_vae
 #sync input from S3
 aws s3 sync s3://input-data-drug-r-us/graph2graph_processed/ ~/sagemaker-dlh/code/graph2graph/data
 
-source activate test_dlh >> $file_train_log 2>&1
-#source train_try.sh >> $file_train_log 2>&1
+source activate test_dlh_1 >> $file_train_log 2>&1
+
+folder_name="trained_models_a_"$current_time
+
 source train_tiny.sh >> $file_train_log 2>&1
+aws s3 cp --recursive ./newmodels_small s3://output-data-drug-r-us/graph2graph/$folder_name/
 
-folder_name="trained_models_"$current_time
-#echo $folder_name
+#source train_1_of_4.sh >> $file_train_log 2>&1
+#aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/graph2graph/$folder_name/
+
 aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/graph2graph/$folder_name/
-aws s3 cp --recursive ./newmodels* s3://output-data-drug-r-us/graph2graph/$folder_name/
-
 #
 '  >> $file_run_log 2>&1
 
 aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
 
-end_time=" [  end-time]: "$(date)
+end_time=" [..end-time]: "$(date)
 
 echo "" >> $file_run_log 2>&1
 uptime >> $file_run_log 2>&1
