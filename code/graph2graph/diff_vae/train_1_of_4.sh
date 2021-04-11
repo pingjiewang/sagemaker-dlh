@@ -2,7 +2,7 @@
 
 # logp06
 mkdir -p newmodels/logp06
-python vae_train.py --train ../data/logp06/processed/ --vocab ../data/logp06/vocab.txt --save_dir newmodels/logp06 --hidden_size 300 --rand_size 16 --anneal_rate 0.9 --epoch 20 --beta 2.0 --batch_size 20 --share_embedding | tee newmodels/logp06/LOG
+python vae_train.py --train ../data/logp06/processed/ --vocab ../data/logp06/vocab.txt --save_dir newmodels/logp06 --hidden_size 300 --rand_size 8 --anneal_rate 0.9 --epoch 20 --beta 2.0 --batch_size 20 --share_embedding | tee newmodels/logp06/LOG
 
 # # logp04
 # mkdir -p newmodels/logp04
