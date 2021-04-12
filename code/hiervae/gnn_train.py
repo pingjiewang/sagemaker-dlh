@@ -12,6 +12,9 @@ from hgraph import *
 import rdkit
 import time
 
+import wandb
+wandb.init(project="hie")
+
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
