@@ -2,46 +2,59 @@
 
 #set EST time format
 timedatectl set-timezone America/New_York
-model_num = 1
+id=1
 start_time=" [start-time]: "$(date)
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-file_run_log=diff_vae_$model_num_of_4_$current_time-run.log
+file_run_log="hie_$id"_num_of_4_"$current_time-run.log"
 
-#Log a special remark
-echo "Remark: " >> $file_run_log 2>&1
-echo "training diff_vae - $model_num of 4, 20 epoch!" >> $file_run_log 2>&1
+# Log a special remark
+# echo "Remark: " >> $file_run_log 2>&1
+echo "pwd:" >> $file_run_log 2>&1
+pwd >> $file_run_log 2>&1
+echo "file_run_log = $file_run_log" >> $file_run_log 2>&1
+echo "training hie - $id of 4, 20 epoch!" >> $file_run_log 2>&1
 #echo "Train_tiny.sh !" >> $file_run_log 2>&1
-echo "" >> $file_run_log 2>&1
 
 su -l ubuntu -c '
 #
+
+id=1
+
+echo " ------------ begin to train model: $id ------------ "
+echo "pwd:"
+pwd
 
 file_name="train"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 
 export file_train_log=$file_name-$current_time.log
+echo "The following is from the real python code:" >> $file_train_log 2>&1
 
+echo "file_train_log = $file_train_log"
 export PYTHONPATH=~/sagemaker-dlh/code/hiervae
-cd ~/sagemaker-dlh/code/hiervae/diff_vae
+cd ~/sagemaker-dlh/code/hiervae
 
 #sync input from S3
-aws s3 sync s3://input-data-drug-r-us/hiervae_processed/ ~/sagemaker-dlh/code/hiervae/data
+#aws s3 sync s3://input-data-drug-r-us/hie_processed/ ~/sagemaker-dlh/code/hiervae/data
 
-source activate test_dlh_1 >> $file_train_log 2>&1
+source activate test_dlh_hie >> $file_train_log 2>&1
 
-folder_name="trained_models_$model_num_of_4_"$current_time
+folder_name="trained_models_$id"_of_4_$current_time
+echo "folder_name = $folder_name"
 
 #source train_tiny.sh >> $file_train_log 2>&1
 #aws s3 cp --recursive ./newmodels_small s3://output-data-drug-r-us/hiervae/$folder_name/
 
-source train_$model_num_of_4.sh >> $file_train_log 2>&1
-aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/hiervae/$folder_name/
+# source "train_$id"_of_4.sh >> $file_train_log 2>&1
+# aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/hiervae/$folder_name/
 
-aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hiervae/$folder_name/
-#
+aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us-hie/hiervae/$folder_name/
+
+echo " ------------ End to train ------------ "
+
 '  >> $file_run_log 2>&1
 
-aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
+ >> $file_run_log 2>&1
 
 end_time=" [..end-time]: "$(date)
 
@@ -50,5 +63,5 @@ uptime >> $file_run_log 2>&1
 echo $start_time >> $file_run_log 2>&1
 echo $end_time >> $file_run_log 2>&1
 
-
-shutdown now
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us-hie
+# shutdown now
