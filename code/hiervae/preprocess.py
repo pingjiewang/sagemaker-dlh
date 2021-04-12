@@ -9,8 +9,8 @@ import numpy
 from hgraph import MolGraph, common_atom_vocab, PairVocab
 import rdkit
 
-import wandb
-wandb.init(project="hie")
+# import wandb
+# wandb.init(project="hie")
 
 def to_numpy(tensors):
     convert = lambda x : x.numpy() if type(x) is torch.Tensor else x
