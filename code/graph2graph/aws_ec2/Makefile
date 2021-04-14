@@ -11,6 +11,31 @@ train_gpu:
 		--instance-type g4dn.xlarge \
 		--user-data file://run_script.txt
 
+train_gpu_1_of_4:
+	aws ec2 run-instances \
+		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
+		--instance-type g4dn.xlarge \
+		--user-data file://run_script_1_of_4.txt
+
+train_gpu_2_of_4:
+	aws ec2 run-instances \
+		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
+		--instance-type g4dn.xlarge \
+		--user-data file://run_script_2_of_4.txt
+
+train_gpu_3_of_4:
+	aws ec2 run-instances \
+		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
+		--instance-type g4dn.xlarge \
+		--user-data file://run_script_3_of_4.txt
+
+train_gpu_4_of_4:
+	aws ec2 run-instances \
+		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
+		--instance-type g4dn.xlarge \
+		--user-data file://run_script_4_of_4.txt
+
+
 train_cpu:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
