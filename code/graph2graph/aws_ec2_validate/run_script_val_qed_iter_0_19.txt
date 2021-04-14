@@ -22,7 +22,7 @@ su -l ubuntu -c '
 #
 export MODEL="qed"
 START=0
-END=19
+END=0
 #
 
 file_name="validate_$MODEL"

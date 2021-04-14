@@ -40,7 +40,7 @@ folder_name="newresults_"$current_time
 
 #mkdir -p ./newresults/logp04
 mkdir -p ./newresults/$MODEL
-#bash val_scripts/valid_logp04_new.sh newmodels newresults 0 0 >> $file_log  2>&1
+#bash val_scripts/valid_logp06_new.sh newmodels newresults 0 0 >> $file_log  2>&1
 bash val_scripts/valid_$MODEL-new.sh newmodels newresults $START $END >> $file_log  2>&1
 
 

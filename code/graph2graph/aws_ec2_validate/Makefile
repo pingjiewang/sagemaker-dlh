@@ -1,56 +1,39 @@
 start_clean:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type t2.small 
-
+		--instance-type t3.small 
 
 
 test: 
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type t2.small \
+		--instance-type t3.small \
 		--user-data file://run_script_val_qed_test.txt
 
 
-train_gpu:
+val_logp06:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script.txt
+		--instance-type t3.small \
+		--user-data file://run_script_val_logp06_iter_0_18.txt
 
-train_gpu_1_of_4:
+val_logp04:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script_1_of_4.txt
+		--instance-type t3.small \
+		--user-data file://run_script_val_logp04_iter_0_18.txt
 
-train_gpu_2_of_4:
+val_qed:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script_2_of_4.txt
+		--instance-type t3.small \
+		--user-data file://run_script_val_qed_iter_0_19.txt
 
-train_gpu_3_of_4:
+val_drd2:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script_3_of_4.txt
-
-train_gpu_4_of_4:
-	aws ec2 run-instances \
-		--launch-template LaunchTemplateId=lt-05608d33d9bc50510 \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script_4_of_4.txt
-
-
-train_cpu:
-	aws ec2 run-instances \
-		--launch-template LaunchTemplateId=lt-088940a9348fd270b \
-		--instance-type t3.large \
-		--user-data file://run_script.txt
-
-
-
+		--instance-type t3.small \
+		--user-data file://run_script_val_drd2_iter_0_19.txt
 
 ###
 
