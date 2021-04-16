@@ -120,5 +120,6 @@ for epoch in range(args.load_epoch + 1, args.epoch):
     print("finished training epoch " + str(epoch+1) + " of " + str(args.epoch))
     print("training time (s) of epoch: "+ str(end_time-start_time))
     print("total time (s): " + str(total_time))
-print "Finished!"
-print "total time (s): " + str(total_time)
+
+print ("Finished!")
+print ("total time (s): " + str(total_time))
