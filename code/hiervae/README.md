@@ -28,8 +28,34 @@ Please replace `data/qed/mols.txt` with your molecules data file.
 python preprocess.py --train data/qed/train_pairs.txt --vocab data/qed/vocab.txt --ncpu 8 < data/qed/train_pairs.txt
 mkdir processed_qed
 mv tensor* processed_qed/
+
+python preprocess.py --train data/drd2/train_pairs.txt --vocab data/drd2/vocab.txt --ncpu 8 < data/drd2/train_pairs.txt
+mkdir processed_drd2
+mv tensor* processed_drd2/
+
+python preprocess.py --train data/logp04/train_pairs.txt --vocab data/logp04/vocab.txt --ncpu 8 < data/logp04/train_pairs.txt
+mkdir processed_logp04
+mv tensor* processed_logp04/
+
+python preprocess.py --train data/logp06/train_pairs.txt --vocab data/logp06/vocab.txt --ncpu 8 < data/logp06/train_pairs.txt
+mkdir processed_logp06
+mv tensor* processed_logp06/
 ```
 Please replace `--train` and `--vocab` with training and vocab file.
+
+Save preprocess results to s3 for training purpose
+
+cd /home/ubuntu/sagemaker-dlh/code/hiervae/processed_qed
+aws s3 cp * s3://input-data-drug-r-us/hiervae_processed/qed/
+ 
+cd /home/ubuntu/sagemaker-dlh/code/hiervae/processed_drd2
+aws s3 cp * s3://input-data-drug-r-us/hiervae_processed/drd2/
+
+cd /home/ubuntu/sagemaker-dlh/code/hiervae/processed_logp04
+aws s3 cp * s3://input-data-drug-r-us/hiervae_processed/logp04/
+
+cd /home/ubuntu/sagemaker-dlh/code/hiervae/processed_logp06
+aws s3 cp * s3://input-data-drug-r-us/hiervae_processed/logp06/
 
 3. Train the model:
 ```
