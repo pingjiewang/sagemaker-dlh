@@ -49,10 +49,10 @@ echo "folder_name = $folder_name"
 
 if [[ $epoch -eq 1 ]]
 then
-  train_script=train_$model_name.sh
+  train_script="train_$model_name"_1.sh
   echo "A quick training. Train_script = $train_script"
 else
-  train_script="train_$model_name"_1.sh
+  train_script=train_$model_name.sh
   echo "A long time training. Train_script = $train_script"
 fi
 source $train_script >> $file_train_log 2>&1
