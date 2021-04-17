@@ -2,8 +2,8 @@
 
 # ----------------------------------
 # To be customized
-model_name="logp04"
-epoch=1
+model_name="logp06"
+epoch=20
 # ----------------------------------
 
 #set EST time format
@@ -28,8 +28,8 @@ echo "" >> $file_run_log 2>&1
 su -l ubuntu -c '
 # ----------------------------------
 # To be customized
-model_name="logp04"
-epoch=1
+model_name="logp06"
+epoch=20
 # ----------------------------------
 file_name="train"
 current_time=$(date "+%H.%M.%S")
@@ -75,4 +75,4 @@ echo $end_time >> $file_run_log 2>&1
 
 aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us/hie/$model_name/$current_date/
 
-shutdown now
+#shutdown now

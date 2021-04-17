@@ -2,7 +2,7 @@
 
 # ----------------------------------
 # To be customized
-model_name="logp04"
+model_name="logp06"
 epoch=1
 # ----------------------------------
 
@@ -28,7 +28,7 @@ echo "" >> $file_run_log 2>&1
 su -l ubuntu -c '
 # ----------------------------------
 # To be customized
-model_name="logp04"
+model_name="logp06"
 epoch=1
 # ----------------------------------
 file_name="train"
