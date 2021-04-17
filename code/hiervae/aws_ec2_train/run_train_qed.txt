@@ -57,9 +57,9 @@ else
 fi
 source $train_script >> $file_train_log 2>&1
 
-aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/hie/$folder_name/
+aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/hie/$folder_name/$current_time
 
-aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$folder_name/
+aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$folder_name/$current_time
 #
 '  >> $file_run_log 2>&1
 
