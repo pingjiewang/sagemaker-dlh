@@ -9,4 +9,25 @@ conda install -c rdkit rdkit=2019.03.4
 pip install networkx
 conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
 
+# To start an EC2 instance and run the training
 
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_drd2.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_logp04.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_logp06.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.xlarge --user-data file://run_train_qed.txt
+
+# To train only one epoch to test whether the script is correct or not.
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_drd2_1.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_logp04_1.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.2xlarge --user-data file://run_train_logp06_1.txt
+
+aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --instance-type g4dn.xlarge --user-data file://run_train_qed_1.txt
+
+# Note: 
+# lt-0cdea90dee9f86d4c is the EC2 instance template. You cannot use the image id directly.
