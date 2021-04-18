@@ -82,8 +82,7 @@ meters = np.zeros(6)
 
 for epoch in range(args.load_epoch + 1, args.epoch):
     dataset = DataFolder(args.train, args.batch_size)
-    print("peter: args.train = ", args.train)
-    print("peter: dataset len:")
+    print("train dataset is located at ", args.train)
     start_time = time.time()
     for batch in dataset:
         total_step += 1
