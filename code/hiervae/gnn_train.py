@@ -82,7 +82,8 @@ meters = np.zeros(6)
 
 for epoch in range(args.load_epoch + 1, args.epoch):
     dataset = DataFolder(args.train, args.batch_size)
-
+    print("peter: args.train = ", args.train)
+    print("peter: dataset len:")
     start_time = time.time()
     for batch in dataset:
         total_step += 1
@@ -115,7 +116,7 @@ for epoch in range(args.load_epoch + 1, args.epoch):
         print("learning rate: %.6f" % scheduler.get_lr()[0])
 
     end_time = time.time()
-    total_time += (end_time-start_time)
+    total_time = (end_time-start_time)
 
     print("finished training epoch " + str(epoch+1) + " of " + str(args.epoch))
     print("training time (s) of epoch: "+ str(end_time-start_time))
