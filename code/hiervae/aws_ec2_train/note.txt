@@ -31,3 +31,5 @@ aws ec2 run-instances --launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c --
 
 # Note: 
 # lt-0cdea90dee9f86d4c is the EC2 instance template. You cannot use the image id directly.
+
+# If the instance has weird issues, you may check log logfile: /var/log/syslog
