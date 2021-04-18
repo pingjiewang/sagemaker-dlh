@@ -34,7 +34,7 @@ epoch=20
 file_name="train"
 current_time=$(date "+%H.%M.%S")
 current_date=$(date "+%Y.%m.%d")
-export file_train_log=$file_name-$current_time.log
+export file_train_log=$file_name.log
 echo "file_train_log = $file_train_log"
 
 export PYTHONPATH=~/sagemaker-dlh/code/hiervae
@@ -60,7 +60,7 @@ source $train_script >> $file_train_log 2>&1
 
 aws s3 cp --recursive ./newmodels/$model_name s3://output-data-drug-r-us/hie/$model_name/$folder_name/
 
-rm -rf ./newmodels
+# rm -rf ./newmodels
 
 aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$model_name/$folder_name/
 #
