@@ -41,7 +41,7 @@ export PYTHONPATH=~/sagemaker-dlh/code/hiervae
 cd ~/sagemaker-dlh/code/hiervae
 
 #sync input from S3
-aws s3 sync s3://input-data-drug-r-us/hiervae_processed ~/sagemaker-dlh/code/hiervae/data
+#aws s3 sync s3://input-data-drug-r-us/hiervae_processed ~/sagemaker-dlh/code/hiervae/data
 
 source activate hiervae >> $file_train_log 2>&1
 
