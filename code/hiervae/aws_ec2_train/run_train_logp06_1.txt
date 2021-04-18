@@ -2,8 +2,8 @@
 
 # ----------------------------------
 # To be customized
-model_name="logp04"
-epoch=20
+model_name="logp06"
+epoch=1
 # ----------------------------------
 
 #set EST time format
@@ -28,8 +28,8 @@ echo "" >> $file_run_log 2>&1
 su -l ubuntu -c '
 # ----------------------------------
 # To be customized
-model_name="logp04"
-epoch=20
+model_name="logp06"
+epoch=1
 # ----------------------------------
 file_name="train"
 current_time=$(date "+%H.%M.%S")

@@ -10,7 +10,8 @@ epoch=20
 timedatectl set-timezone America/New_York
 
 start_time=" [start-time]: "$(date)
-current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+current_time=$(date "+%H.%M.%S")
+current_date=$(date "+%Y.%m.%d")
 file_run_log="train_hier_$model_name"_$current_time-run.log
 
 #Log a special remark
@@ -31,20 +32,20 @@ model_name="qed"
 epoch=20
 # ----------------------------------
 file_name="train"
-current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+current_time=$(date "+%H.%M.%S")
 current_date=$(date "+%Y.%m.%d")
-export file_train_log=$file_name-$current_time.log
+export file_train_log=$file_name.log
 echo "file_train_log = $file_train_log"
 
 export PYTHONPATH=~/sagemaker-dlh/code/hiervae
 cd ~/sagemaker-dlh/code/hiervae
 
 #sync input from S3
-aws s3 sync s3://input-data-drug-r-us/hiervae_processed ~/sagemaker-dlh/code/hiervae/data
+#aws s3 sync s3://input-data-drug-r-us/hiervae_processed ~/sagemaker-dlh/code/hiervae/data
 
 source activate hiervae >> $file_train_log 2>&1
 
-folder_name=$current_date/trained_model_$model_name
+folder_name="$current_date/trained_model_$current_time"
 echo "folder_name = $folder_name"
 
 if [[ $epoch -eq 1 ]]
@@ -57,15 +58,13 @@ else
 fi
 source $train_script >> $file_train_log 2>&1
 
-aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/hie/$folder_name/$current_time
+aws s3 cp --recursive ./newmodels/$model_name s3://output-data-drug-r-us/hie/$model_name/$folder_name/
 
-rm -rf ./newmodels
+# rm -rf ./newmodels
 
-aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$folder_name/$current_time
+aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$model_name/$folder_name/
 #
 '  >> $file_run_log 2>&1
-
-aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
 
 end_time=" [..end-time]: "$(date)
 
@@ -73,5 +72,7 @@ echo "" >> $file_run_log 2>&1
 uptime >> $file_run_log 2>&1
 echo $start_time >> $file_run_log 2>&1
 echo $end_time >> $file_run_log 2>&1
+
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us/hie/$model_name/$current_date/
 
 shutdown now

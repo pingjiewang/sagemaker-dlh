@@ -2,7 +2,7 @@
 
 # ----------------------------------
 # To be customized
-model_name="logp04"
+model_name="logp06"
 epoch=20
 # ----------------------------------
 
@@ -28,7 +28,7 @@ echo "" >> $file_run_log 2>&1
 su -l ubuntu -c '
 # ----------------------------------
 # To be customized
-model_name="logp04"
+model_name="logp06"
 epoch=20
 # ----------------------------------
 file_name="train"
@@ -75,4 +75,4 @@ echo $end_time >> $file_run_log 2>&1
 
 aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us/hie/$model_name/$current_date/
 
-shutdown now
+#shutdown now
