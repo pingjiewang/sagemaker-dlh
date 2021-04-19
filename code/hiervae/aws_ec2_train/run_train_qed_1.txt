@@ -36,7 +36,6 @@ current_time=$(date "+%H.%M.%S")
 current_date=$(date "+%Y.%m.%d")
 export file_train_log=$file_name.log
 echo "file_train_log = $file_train_log"
-rm $file_train_log
 
 export PYTHONPATH=~/sagemaker-dlh/code/hiervae
 cd ~/sagemaker-dlh/code/hiervae

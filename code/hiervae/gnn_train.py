@@ -79,7 +79,7 @@ grad_norm = lambda m: math.sqrt(sum([p.grad.norm().item() ** 2 for p in m.parame
 total_step = 0
 beta = args.beta
 meters = np.zeros(6)
-
+total_time = 0
 for epoch in range(args.load_epoch + 1, args.epoch):
     dataset = DataFolder(args.train, args.batch_size)
     print("train dataset is located at ", args.train)
@@ -115,7 +115,7 @@ for epoch in range(args.load_epoch + 1, args.epoch):
         print("learning rate: %.6f" % scheduler.get_lr()[0])
 
     end_time = time.time()
-    total_time = (end_time-start_time)
+    total_time += (end_time-start_time)
 
     print("finished training epoch " + str(epoch+1) + " of " + str(args.epoch))
     print("training time (s) of epoch: "+ str(end_time-start_time))
