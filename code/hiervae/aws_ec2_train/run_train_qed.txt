@@ -31,12 +31,15 @@ su -l ubuntu -c '
 model_name="qed"
 epoch=20
 # ----------------------------------
+
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="hie_$model_name"
+
 file_name="train"
 current_time=$(date "+%H.%M.%S")
 current_date=$(date "+%Y.%m.%d")
 export file_train_log=$file_name.log
 echo "file_train_log = $file_train_log"
-rm $file_train_log
 
 export PYTHONPATH=~/sagemaker-dlh/code/hiervae
 cd ~/sagemaker-dlh/code/hiervae
@@ -45,6 +48,8 @@ cd ~/sagemaker-dlh/code/hiervae
 aws s3 sync s3://input-data-drug-r-us/hiervae_processed/$model_name/processed ~/sagemaker-dlh/code/hiervae/data/$model_name/processed
 
 source activate hiervae >> $file_train_log 2>&1
+echo "WANDB_API_KEY=$WANDB_API_KEY"
+echo "WANDB_PROJECT=$WANDB_PROJECT"
 
 folder_name="$current_date/trained_model_$current_time"
 echo "folder_name = $folder_name"
