@@ -12,6 +12,15 @@ from hgraph import *
 import rdkit
 import time
 
+import wandb
+
+# 1. Start a W&B run
+wandb.init()
+
+# 2. Save model inputs and hyperparameters
+config = wandb.config
+config.learning_rate = 0.01
+
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
@@ -76,6 +85,9 @@ scheduler = lr_scheduler.ExponentialLR(optimizer, args.anneal_rate)
 param_norm = lambda m: math.sqrt(sum([p.norm().item() ** 2 for p in m.parameters()]))
 grad_norm = lambda m: math.sqrt(sum([p.grad.norm().item() ** 2 for p in m.parameters() if p.grad is not None]))
 
+# 3. Log gradients and model parameters
+wandb.watch(model)
+
 total_step = 0
 beta = args.beta
 meters = np.zeros(6)
@@ -98,6 +110,8 @@ for epoch in range(args.load_epoch + 1, args.epoch):
 
         if total_step % args.print_iter == 0:
             meters /= args.print_iter
+            # 4. Log metrics to visualize performance
+            wandb.log({"loss": meters[1]})
             print("[%d] Beta: %.3f, KL: %.2f, loss: %.3f, Word: %.2f, %.2f, Topo: %.2f, Assm: %.2f, PNorm: %.2f, GNorm: %.2f" % (total_step, beta, meters[0], meters[1], meters[2], meters[3], meters[4], meters[5], param_norm(model), grad_norm(model)))
             sys.stdout.flush()
             meters *= 0
