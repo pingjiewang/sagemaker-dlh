@@ -7,6 +7,7 @@ source activate hiervae
 conda install numpy=1.19.1
 conda install -c rdkit rdkit=2019.03.4
 pip install networkx
+pip install wandb
 conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
 
 # To start an EC2 instance and run the training
