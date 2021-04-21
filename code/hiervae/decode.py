@@ -53,10 +53,16 @@ args.test = [line.strip("\r\n ") for line in open(args.test)]
 vocab = [x.strip("\r\n ").split() for x in open(args.vocab)] 
 args.vocab = PairVocab(vocab) 
 
-if args.novi:
-    model = HierGNN(args).cuda()
+if torch.cuda.is_available():
+    if args.novi:
+        model = HierGNN(args).cuda()
+    else:
+        model = HierVGNN(args).cuda()
 else:
-    model = HierVGNN(args).cuda()
+    if args.novi:
+        model = HierGNN(args)
+    else:
+        model = HierVGNN(args)
 
 model.load_state_dict(torch.load(args.model))
 model.eval()
