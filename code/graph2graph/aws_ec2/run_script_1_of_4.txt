@@ -17,7 +17,7 @@ su -l ubuntu -c '
 #
 # Wandb
 export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
-export WANDB_PROJECT="hie_$model_name"
+export WANDB_PROJECT="graph2graph_train_1_of_4"
 
 file_name="train"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
