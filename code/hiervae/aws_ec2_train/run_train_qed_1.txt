@@ -33,7 +33,7 @@ epoch=1
 # ----------------------------------
 
 export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
-export WANDB_PROJECT="hie_$model_name"
+export WANDB_PROJECT="hie_train_$model_name"
 
 file_name="train"
 current_time=$(date "+%H.%M.%S")
