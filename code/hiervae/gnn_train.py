@@ -19,7 +19,7 @@ wandb.init()
 
 # 2. Save model inputs and hyperparameters
 config = wandb.config
-config.learning_rate = 0.01
+config.learning_rate = 0.9
 
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
