@@ -11,6 +11,15 @@ import argparse
 from hgraph import *
 import rdkit
 
+import wandb
+
+# 1. Start a W&B run
+wandb.init()
+
+# 2. Save model inputs and hyperparameters
+config = wandb.config
+config.learning_rate = 0.9
+
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
@@ -52,6 +61,9 @@ else:
 model.load_state_dict(torch.load(args.model))
 model.eval()
 
+# 3. Log gradients and model parameters
+wandb.watch(model)
+
 dataset = MolEnumRootDataset(args.test, args.vocab, args.atom_vocab)
 loader = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=0, collate_fn=lambda x:x[0])
 
@@ -66,6 +78,9 @@ with torch.no_grad():
                 print(smiles, smiles)
         else:
             new_mols = model.translate(batch[1], args.num_decode, args.enum_root, args.greedy)
+			# 4. Log metrics to visualize performance
+            # wandb.log({"loss": meters[1]})
+			# TBD: Need to log the score. --------------------- ?
             for k in range(args.num_decode):
                 print(smiles, new_mols[k]) 
 
