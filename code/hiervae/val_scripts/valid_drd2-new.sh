@@ -9,6 +9,6 @@ for ((i=ST; i<=ED; i++)); do
     f=$DIR_MODEL/drd2/model.$i
     if [ -e $f ]; then
         echo $f
-        python decode.py --test ../data/molopt/drd2/valid.txt --vocab ../data/molopt/drd2/align_vocab.txt --enum_root --model $f --hidden_size 270 --embed_size 200 | python ../scripts/drd2_score.py > $DIR_OUT/drd2/results.$i &
+        python decode.py --test ../data/molopt/drd2/valid.txt --vocab ../data/molopt/drd2/align_vocab.txt --enum_root --model $f --hidden_size 270 --embed_size 200  | sed -r '/^\s*$/d' | python ../scripts/drd2_score.py > $DIR_OUT/drd2/results.$i &
     fi
 done
