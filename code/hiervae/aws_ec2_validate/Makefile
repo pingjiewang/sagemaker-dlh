@@ -1,20 +1,20 @@
 start-clean: 
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
-		--instance-type t3.small 
+		--instance-type t3.medium 
 
 test: 
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
 		--instance-type t3.medium \
-		--user-data run_script_val_qed_test.txt
+		--user-data file://run_script_val_qed_test.txt
 
 
 validate_test:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
-		--instance-type t3.medium \
-		--user-data run_script_val_qed_test.txt
+		--instance-type g4dn.xlarge \
+		--user-data file://run_script_val_qed_test.txt
 
 sync: sync-output
 
