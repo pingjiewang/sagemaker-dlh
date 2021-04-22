@@ -11,13 +11,13 @@ import argparse
 from hgraph import *
 import rdkit
 
-import wandb
+#import wandb
 
 # 1. Start a W&B run
-wandb.init()
+#wandb.init()
 
 # 2. Save model inputs and hyperparameters
-config = wandb.config
+#config = wandb.config
 config.learning_rate = 0.9
 
 lg = rdkit.RDLogger.logger() 
@@ -68,7 +68,7 @@ model.load_state_dict(torch.load(args.model))
 model.eval()
 
 # 3. Log gradients and model parameters
-wandb.watch(model)
+#wandb.watch(model)
 
 dataset = MolEnumRootDataset(args.test, args.vocab, args.atom_vocab)
 loader = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=0, collate_fn=lambda x:x[0])
