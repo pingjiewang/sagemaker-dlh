@@ -26,3 +26,10 @@ done
 
 ./newmodels => ./newmodels/qed/model.iter-$i
 
+
+
+###todo 
+aws s3 sync s3://input-data-drug-r-us/hiervae_trained ~/sagemaker-dlh/code/hiervae/newmodels
+
+pip install props
+sync

@@ -1,21 +1,14 @@
 test: 
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
-		--instance-type t3.medium \
-#		--user-data file://run_script.txt
+		--instance-type t3.medium 
 
 
-train_gpu:
+train_qed1:
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
 		--instance-type g4dn.xlarge \
-		--user-data file://run_script.txt
-
-train_gpu_1_of_4:
-	aws ec2 run-instances \
-		--launch-template LaunchTemplateId=lt-0cdea90dee9f86d4c \
-		--instance-type g4dn.xlarge \
-		--user-data file://run_script_1_of_4.txt
+		--user-data file://run_train_qed_1.txt
 
 
 sync:
