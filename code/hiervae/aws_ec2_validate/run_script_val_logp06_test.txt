@@ -2,7 +2,7 @@
 
 MODEL="logp06"
 START=0
-END=0
+END=19
 
 #set EST time format
 timedatectl set-timezone America/New_York
@@ -22,7 +22,7 @@ su -l ubuntu -c '
 #
 export MODEL="logp06"
 START=0
-END=0
+END=19
 #
 
 file_name="validate_$MODEL"
