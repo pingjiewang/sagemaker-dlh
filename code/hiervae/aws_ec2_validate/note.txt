@@ -1,0 +1,61 @@
+# How did we do it for diff_vae..
+```
+bash val_scripts/valid_$MODEL-new.sh newmodels newresults $START $END 
+```
+
+# cat valid_qed-new.hsh
+
+```
+#!/bin/bash
+
+DIR_MODEL=$1
+DIR_OUT=$2
+NUM_START=$3
+NUM_END=$4
+
+for ((i=NUM_START; i<=NUM_END; i++)); do
+    f=$DIR_MODEL/qed/model.iter-$i
+    if [ -e $f ]; then
+        echo $f
+        python decode_validation.py --test ../data/qed/valid.txt --vocab ../data/qed/vocab.txt --model $f --hidden_size 300 --rand_size 8 --use_molatt | python ../scripts/qed_score.py > $DIR_OUT/qed/results.$i
+        python ../scripts/qed_analyze.py < $DIR_OUT/qed/results.$i
+    fi
+done
+```
+# Where did we put model file?
+
+./newmodels => ./newmodels/qed/model.iter-$i
+
+
+
+###todo 
+aws s3 sync s3://input-data-drug-r-us/hiervae_trained ~/sagemaker-dlh/code/hiervae/newmodels
+
+pip install props
+
+#---------todo: 4/22
+
+git pull
+
+#pip install .
+source activate hiervae
+conda install -y scikit-learn
+
+#set python path
+export PYTHONPATH=~/sagemaker-dlh/code/hiervae
+
+#manualy
+python decode.py --test data/qed/valid.txt --vocab data/qed/vocab.txt --model newmodels/qed/model.0 --hidden_size 300 --embed_size 300 --latent_size 8 >decode_output.txt
+
+
+
+ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-3-135-215-237.us-east-2.compute.amazonaws.com
+
+
+
+
+python decode.py --test data/qed/valid.txt --vocab data/qed/vocab.txt --model newmodels/qed/model.0 --hidden_size 300 --embed_size 300 --latent_size 8 > decode_output.txt
+
+
+sed -r '/^\s*$/d' decode_output.txt > decode_output1.txt 
+cat decode_output1.txt | python scripts/qed_score.py

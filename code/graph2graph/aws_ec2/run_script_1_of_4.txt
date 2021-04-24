@@ -15,6 +15,9 @@ echo "" >> $file_run_log 2>&1
 
 su -l ubuntu -c '
 #
+# Wandb
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="graph2graph_train_1_of_4"
 
 file_name="train"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
@@ -31,6 +34,9 @@ source activate test_dlh_1 >> $file_train_log 2>&1
 
 folder_name="trained_models_1_of_4_"$current_time
 
+echo "WANDB_API_KEY=$WANDB_API_KEY"
+echo "WANDB_PROJECT=$WANDB_PROJECT"
+
 #source train_tiny.sh >> $file_train_log 2>&1
 #aws s3 cp --recursive ./newmodels_small s3://output-data-drug-r-us/graph2graph/$folder_name/
 
@@ -38,6 +44,8 @@ source train_1_of_4.sh >> $file_train_log 2>&1
 aws s3 cp --recursive ./newmodels s3://output-data-drug-r-us/graph2graph/$folder_name/
 
 aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/graph2graph/$folder_name/
+
+
 #
 '  >> $file_run_log 2>&1
 

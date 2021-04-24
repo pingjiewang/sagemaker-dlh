@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# ----------------------------------
+# To be customized
+model_name="qed"
+epoch=20
+# ----------------------------------
+
+#set EST time format
+timedatectl set-timezone America/New_York
+
+start_time=" [start-time]: "$(date)
+current_time=$(date "+%H.%M.%S")
+current_date=$(date "+%Y.%m.%d")
+file_run_log="train_hier_$model_name"_$current_time-run.log
+
+#Log a special remark
+echo "Remark: " >> $file_run_log 2>&1
+if [[ $epoch -eq 1 ]]
+then
+  echo "training hier_vae $model_name, 1 epoch only!" >> $file_run_log 2>&1
+else
+  echo "training hier_vae $model_name, a long time training!" >> $file_run_log 2>&1
+fi
+
+echo "" >> $file_run_log 2>&1
+
+su -l ubuntu -c '
+# ----------------------------------
+# To be customized
+model_name="qed"
+epoch=20
+# ----------------------------------
+
+file_name="train"
+current_time=$(date "+%H.%M.%S")
+current_date=$(date "+%Y.%m.%d")
+
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="hie_train_$model_name-$current_date-$current_time"
+
+export file_train_log=$file_name.log
+echo "file_train_log = $file_train_log"
+
+# export PYTHONPATH=~/sagemaker-dlh/code/hiervae
+cd ~/sagemaker-dlh/code/hiervae
+
+#sync input from S3
+aws s3 sync s3://input-data-drug-r-us/hiervae_processed/$model_name/processed ~/sagemaker-dlh/code/hiervae/data/$model_name/processed
+
+source activate hiervae >> $file_train_log 2>&1
+echo "WANDB_API_KEY=$WANDB_API_KEY"
+echo "WANDB_PROJECT=$WANDB_PROJECT"
+
+folder_name="$current_date/trained_model_$current_time"
+echo "folder_name = $folder_name"
+
+if [[ $epoch -eq 1 ]]
+then
+  train_script="train_$model_name"_1.sh
+  echo "A quick training. Train_script = $train_script"
+else
+  train_script=train_$model_name.sh
+  echo "A long time training. Train_script = $train_script"
+fi
+source $train_script >> $file_train_log 2>&1
+
+aws s3 cp --recursive ./newmodels/$model_name s3://output-data-drug-r-us/hie/$model_name/$folder_name/
+
+# rm -rf ./newmodels
+
+aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/hie/$model_name/$folder_name/
+#
+'  >> $file_run_log 2>&1
+
+end_time=" [..end-time]: "$(date)
+
+echo "" >> $file_run_log 2>&1
+uptime >> $file_run_log 2>&1
+echo $start_time >> $file_run_log 2>&1
+echo $end_time >> $file_run_log 2>&1
+
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us/hie/$model_name/$current_date/
+
+shutdown now

@@ -50,3 +50,11 @@ a git repos for playing with AWS SageMaker
 - Step 1: set up SSH locally https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
 - Step 2: to add your info into github https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+
+# Wandb
+
+- Welcome to Weights & Biases - Introduction Walkthrough (2020) https://www.youtube.com/watch?v=91HhNtmb0B4&t=191s
+
+- Doc of Weights & Biases  https://docs.wandb.ai/
+
+- An example / How to use wandb / Step 1 - 4  https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/gnn_train.py

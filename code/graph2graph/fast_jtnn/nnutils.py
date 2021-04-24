@@ -8,7 +8,7 @@ def create_var(tensor, requires_grad=None):
         #return Variable(tensor).cuda()
         return Variable(tensor)
     else:
-	#return Variable(tensor, requires_grad=requires_grad).cuda()
+	    #return Variable(tensor, requires_grad=requires_grad).cuda()
         return Variable(tensor, requires_grad=requires_grad)
 
 def index_select_ND(source, dim, index):

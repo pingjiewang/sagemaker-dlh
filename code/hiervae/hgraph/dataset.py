@@ -77,6 +77,7 @@ class DataFolder(object):
     def __iter__(self):
         for fn in self.data_files:
             fn = os.path.join(self.data_folder, fn)
+            print("This train data wil be processed: ", fn)
             with open(fn, 'rb') as f:
                 batches = pickle.load(f)
 

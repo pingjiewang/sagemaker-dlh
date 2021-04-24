@@ -10,7 +10,7 @@ file_run_log=graph2graph_$current_time-run.log
 #Log a special remark
 echo "Remark: " >> $file_run_log 2>&1
 #echo "training diff_vae - 1 of 4, 20 epoch!" >> $file_run_log 2>&1
-echo "Train_tiny.sh !" >> $file_run_log 2>&1
+echo "train_tiny.sh !" >> $file_run_log 2>&1
 echo "" >> $file_run_log 2>&1
 
 su -l ubuntu -c '

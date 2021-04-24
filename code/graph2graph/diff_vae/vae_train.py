@@ -14,6 +14,14 @@ import cPickle as pickle
 from fast_jtnn import *
 import rdkit
 import time
+import wandb
+
+# 1. Start a W&B run
+wandb.init()
+
+# 2. Save model inputs and hyperparameters
+config = wandb.config
+config.learning_rate = 0.9
 
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
@@ -45,10 +53,14 @@ vocab = [x.strip("\r\n ") for x in open(args.vocab)]
 vocab = Vocab(vocab)
 
 model=None
+
 if torch.cuda.is_available():
     model = DiffVAE(vocab, args).cuda()
 else:
     model = DiffVAE(vocab, args)
+
+# 3. Log gradients and model parameters
+wandb.watch(model)
 
 for param in model.parameters():
     if param.dim() == 1:
@@ -90,6 +102,9 @@ for epoch in xrange(args.load_epoch + 1, args.epoch):
         optimizer.step()
 
         meters = meters + np.array([kl_div, wacc * 100, tacc * 100, sacc * 100])
+
+        # 4. Log metrics to visualize performance
+        # wandb.log({"loss": meters[1]})
 
         if (it + 1) % PRINT_ITER == 0:
             meters /= PRINT_ITER

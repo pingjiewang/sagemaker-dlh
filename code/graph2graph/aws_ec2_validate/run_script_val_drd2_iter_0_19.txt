@@ -1,0 +1,63 @@
+#!/bin/bash
+
+MODEL="drd2"
+START=0
+END=19
+
+#set EST time format
+timedatectl set-timezone America/New_York
+
+start_time=" [start-time]: "$(date)
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+#file_run_log=run_val_logp04_$current_time.log
+file_run_log=run_val_$MODEL-$current_time.log
+echo $file_run_log
+
+#Log a special remark
+echo "Remark: " >> $file_run_log 2>&1
+echo "Validating diff_vae $MODEL iterations: $START to $END !" >> $file_run_log 2>&1
+echo "" >> $file_run_log 2>&1
+
+su -l ubuntu -c '
+#
+export MODEL="drd2"
+START=0
+END=19
+#
+
+file_name="validate_$MODEL"
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+
+export file_log=$file_name-$current_time.log
+
+export PYTHONPATH=~/sagemaker-dlh/code/graph2graph
+cd ~/sagemaker-dlh/code/graph2graph/diff_vae
+
+source activate test_dlh_1 >> $file_log 2>&1
+
+folder_name="newresults_"$current_time
+
+
+#mkdir -p ./newresults/logp04
+mkdir -p ./newresults/$MODEL
+#bash val_scripts/valid_logp04_new.sh newmodels newresults 0 0 >> $file_log  2>&1
+bash val_scripts/valid_$MODEL-new.sh newmodels newresults $START $END >> $file_log  2>&1
+
+
+aws s3 cp --recursive ./newresults s3://output-data-drug-r-us/graph2graph/$folder_name/
+
+aws s3 cp --quiet $file_log s3://output-data-drug-r-us/graph2graph/$folder_name/
+#
+'  >> $file_run_log 2>&1
+
+
+end_time=" [..end-time]: "$(date)
+
+echo "" >> $file_run_log 2>&1
+uptime >> $file_run_log 2>&1
+echo $start_time >> $file_run_log 2>&1
+echo $end_time >> $file_run_log 2>&1
+
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
+
+shutdown now
