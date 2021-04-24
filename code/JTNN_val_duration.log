@@ -1,0 +1,5 @@
+drd2 - 20 epochs - 14 hours 35 minutes 37 seconds = 52537 seconds
+qed - 20 epochs - 2 hours 20 minutes 11 seconds + 3 hours 1 minute 24 seconds + 1 hour 40 minutes 40 seconds  = 7 hours 2 minutes 15 seconds = 25335 seconds
+logp04 - 19 epochs - 4 hours 15 minutes 41 seconds = 15341 seconds
+logp06 - 19 epochs -  5 hours 2 minutes 15 seconds = 18135 seconds
+(52537/20+25335/20+15341/19+18135/19)/((500+360+200+200)*20) = 0.22 seconds per moelcule

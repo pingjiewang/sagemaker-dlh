@@ -1,0 +1,5 @@
+drd2 - 20 epoch - 13778 seconds
+logp04 - 20 epoch - 4854 seconds
+qed - 20 epoch - 8112 seconds
+total = 13778 + 4854 + 8112 = 26744 s
+(13778/20 + 4854/20 + 8112/20)/((500+360+200)*20) = 0.063 s per molecule
