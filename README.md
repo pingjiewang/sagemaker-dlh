@@ -54,3 +54,7 @@ a git repos for playing with AWS SageMaker
 # Wandb
 
 - Welcome to Weights & Biases - Introduction Walkthrough (2020) https://www.youtube.com/watch?v=91HhNtmb0B4&t=191s
+
+- Doc of Weights & Biases  https://docs.wandb.ai/
+
+- An example / How to use wandb / Step 1 - 4  https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/gnn_train.py
