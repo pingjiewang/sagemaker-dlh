@@ -5,7 +5,7 @@ timedatectl set-timezone America/New_York
 
 start_time=" [start-time]: "$(date)
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-file_run_log=preprocess_fast_molvae_$current_time-run.log
+file_run_log=train_fast_molvae_small$current_time-run.log
 
 #Log a special remark
 echo "Remark: " >> $file_run_log 2>&1
@@ -18,7 +18,7 @@ su -l ubuntu -c '
 #export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
 #export WANDB_PROJECT="graph2graph_train_1_of_4"
 
-file_name="train_"
+file_name="train_small"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 
 export file_train_log=$file_name-$current_time.log
@@ -40,10 +40,10 @@ folder_name="train_fast_molvae_small"$current_time
 #echo "WANDB_PROJECT=$WANDB_PROJECT"
 
 mkdir zinc_model_small/
-python vae_train.py  --hidden_size 300 --latent_size 8 --train zinc-processed_small --vocab ../data/zinc/vocab.txt --save_dir zinc_model_small/
+python vae_train.py  --hidden_size 300 --latent_size 8 --train zinc-processed_small --vocab ../data/zinc/vocab.txt --save_dir zinc_model_small/ >> $file_train_log 2>&1
 
 
-aws s3 cp --recursive ./zinc_model_small s3://output-data-drug-r-us/fast_molvae/train_small/$folder_name/
+aws s3 cp --recursive ./zinc_model_small s3://output-data-drug-r-us/fast_molvae/train_small/$folder_name/ 
 aws s3 cp --quiet $file_train_log s3://output-data-drug-r-us/fast_molvae/train_small/$folder_name/
 
 
