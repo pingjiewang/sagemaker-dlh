@@ -15,8 +15,8 @@ echo "" >> $file_run_log 2>&1
 su -l ubuntu -c '
 #
 # Wandb
-#export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
-#export WANDB_PROJECT="graph2graph_train_1_of_4"
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="jnn_train"
 
 file_name="preprocess_"
 current_time=$(date "+%Y.%m.%d-%H.%M.%S")
@@ -36,8 +36,8 @@ source activate test_dlh_1 >> $file_train_log 2>&1
 
 folder_name="preprocess_fast_molvae_"$current_time
 
-#echo "WANDB_API_KEY=$WANDB_API_KEY"
-#echo "WANDB_PROJECT=$WANDB_PROJECT"
+echo "WANDB_API_KEY=$WANDB_API_KEY"
+echo "WANDB_PROJECT=$WANDB_PROJECT"
 
 python preprocess.py --train ../data/zinc/train.txt --split 10 --jobs 8
 mkdir zinc-processed

@@ -14,6 +14,8 @@ import cPickle as pickle
 from fast_jtnn import *
 import rdkit
 
+import wandb
+
 # 1. Start a W&B run
 wandb.init()
 
