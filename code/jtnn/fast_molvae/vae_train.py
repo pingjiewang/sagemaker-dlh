@@ -118,4 +118,5 @@ for epoch in xrange(args.epoch):
         if total_step % args.kl_anneal_iter == 0 and total_step >= args.warmup:
             beta = min(args.max_beta, beta + args.step_beta)
 
-    torch.save(model.state_dict(), args.save_dir + "/model.iter-" + str(total_step))
+    torch.save(model.state_dict(), args.save_dir + "/model" + str(epoch))
+epoch
