@@ -14,6 +14,13 @@ import cPickle as pickle
 from fast_jtnn import *
 import rdkit
 
+# 1. Start a W&B run
+wandb.init()
+
+# 2. Save model inputs and hyperparameters
+config = wandb.config
+config.learning_rate = 0.01
+
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
@@ -51,6 +58,8 @@ vocab = Vocab(vocab)
 
 model = JTNNVAE(vocab, args.hidden_size, args.latent_size, args.depthT, args.depthG).cuda()
 print model
+# 3. Log gradients and model parameters
+wandb.watch(model)
 
 for param in model.parameters():
     if param.dim() == 1:
@@ -93,6 +102,8 @@ for epoch in xrange(args.epoch):
 
         if total_step % args.print_iter == 0:
             meters /= args.print_iter
+            wandb.log({"Topo": meters[2]})
+            wandb.log({"Assm": meters[3]})
             print "[%d] Beta: %.3f, KL: %.2f, Word: %.2f, Topo: %.2f, Assm: %.2f, PNorm: %.2f, GNorm: %.2f" % (total_step, beta, meters[0], meters[1], meters[2], meters[3], param_norm(model), grad_norm(model))
             sys.stdout.flush()
             meters *= 0
