@@ -4,6 +4,7 @@ This code has been copied from https://github.com/wengong-jin/icml18-jtnn.
 
 Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](https://arxiv.org/abs/1802.04364)
 
+
 ## Requirements
 * Python == 2.7
 * RDKit >= 2017.09
@@ -25,6 +26,11 @@ The following directories provides scripts for the experiments in our original I
 * `data/` ZINC training data for smiles and properties
 
 ## Steps
+
+Original Readme:
+
+https://github.com/wengong-jin/icml18-jtnn/tree/master/fast_molvae
+
 * source activate test_dlh_1
 * export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 * cd ~/sagemaker-dlh/code/jtnn/fast_molvae
