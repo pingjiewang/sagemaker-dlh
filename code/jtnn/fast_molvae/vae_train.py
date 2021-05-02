@@ -76,6 +76,7 @@ meters = np.zeros(4)
 
 for epoch in xrange(args.epoch):
     loader = MolTreeFolder(args.train, vocab, args.batch_size, num_workers=4)
+
     for batch in loader:
         total_step += 1
         try:
@@ -96,8 +97,6 @@ for epoch in xrange(args.epoch):
             sys.stdout.flush()
             meters *= 0
 
-        if total_step % args.save_iter == 0:
-            torch.save(model.state_dict(), args.save_dir + "/model.iter-" + str(total_step))
 
         if total_step % args.anneal_iter == 0:
             scheduler.step()
@@ -105,3 +104,5 @@ for epoch in xrange(args.epoch):
 
         if total_step % args.kl_anneal_iter == 0 and total_step >= args.warmup:
             beta = min(args.max_beta, beta + args.step_beta)
+
+    torch.save(model.state_dict(), args.save_dir + "/model.iter-" + str(total_step))
