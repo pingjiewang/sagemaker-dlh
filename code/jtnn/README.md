@@ -23,3 +23,10 @@ The following directories provides scripts for the experiments in our original I
 * `molopt/` includes scripts for jointly training our VAE and property predictors. Please read `molopt/README.md` for details.
 * `jtnn/` contains codes for model formulation.
 * `data/` ZINC training data for smiles and properties
+
+## Steps
+* source activate test_dlh_1
+* export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+* cd ~/sagemaker-dlh/code/jtnn/fast_molvae
+* mkdir zinc_model_small/
+* python vae_train.py  --hidden_size 300 --latent_size 8 --train zinc-processed_small --vocab ../data/zinc/vocab.txt --save_dir zinc_model_small/
