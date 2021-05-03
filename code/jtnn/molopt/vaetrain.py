@@ -13,6 +13,15 @@ from jtnn import *
 import rdkit
 import time
 
+import wandb
+
+# 1. Start a W&B run
+wandb.init()
+
+# 2. Save model inputs and hyperparameters
+config = wandb.config
+config.learning_rate = 0.9
+
 lg = rdkit.RDLogger.logger() 
 lg.setLevel(rdkit.RDLogger.CRITICAL)
 
@@ -42,6 +51,9 @@ beta = float(opts.beta)
 lr = float(opts.lr)
 
 model = JTPropVAE(vocab, hidden_size, latent_size, depth)
+
+# 3. Log gradients and model parameters
+wandb.watch(model)
 
 if opts.model_path is not None:
     model.load_state_dict(torch.load(opts.model_path))
@@ -95,7 +107,10 @@ for epoch in xrange(MAX_EPOCH):
             assm_acc = assm_acc / PRINT_ITER * 100
             steo_acc = steo_acc / PRINT_ITER * 100
             prop_acc /= PRINT_ITER
-
+            
+            # 4. Log metrics to visualize performance
+            wandb.log({"KL": kl_div})
+            
             print "KL: %.1f, Word: %.2f, Topo: %.2f, Assm: %.2f, Steo: %.2f, Prop: %.4f" % (kl_div, word_acc, topo_acc, assm_acc, steo_acc, prop_acc)
             word_acc,topo_acc,assm_acc,steo_acc,prop_acc = 0,0,0,0,0
             sys.stdout.flush()
