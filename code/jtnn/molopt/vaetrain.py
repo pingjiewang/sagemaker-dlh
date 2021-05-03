@@ -110,6 +110,7 @@ for epoch in xrange(MAX_EPOCH):
             
             # 4. Log metrics to visualize performance
             wandb.log({"KL": kl_div})
+            wandb.log({"loss": loss.item()})
             
             print "KL: %.1f, Word: %.2f, Topo: %.2f, Assm: %.2f, Steo: %.2f, Prop: %.4f" % (kl_div, word_acc, topo_acc, assm_acc, steo_acc, prop_acc)
             word_acc,topo_acc,assm_acc,steo_acc,prop_acc = 0,0,0,0,0
