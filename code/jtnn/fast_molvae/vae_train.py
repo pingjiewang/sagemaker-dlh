@@ -119,4 +119,3 @@ for epoch in xrange(args.epoch):
             beta = min(args.max_beta, beta + args.step_beta)
 
     torch.save(model.state_dict(), args.save_dir + "/model" + str(epoch))
-epoch
