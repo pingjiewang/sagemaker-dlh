@@ -28,11 +28,29 @@ The following directories provides scripts for the experiments in our original I
 ## Steps
 
 Original Readme:
-
-https://github.com/wengong-jin/icml18-jtnn/tree/master/fast_molvae
-
+https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * source activate test_dlh_1
 * export PYTHONPATH=~/sagemaker-dlh/code/jtnn
-* cd ~/sagemaker-dlh/code/jtnn/fast_molvae
-* mkdir zinc_model_small/
-* python vae_train.py  --hidden_size 300 --latent_size 8 --train zinc-processed_small --vocab ../data/zinc/vocab.txt --save_dir zinc_model_small/
+* cd ~/sagemaker-dlh/code/jtnn/fast_molopt
+
+## train penalized logP
+
+* mkdir pre_model_logP/
+* CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.logP-SA --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_logP/
+* mkdir vae_model_logP/
+* CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.logP-SA --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_logP/model.best --save_dir vae_model_logP/
+
+## train qed
+
+* mkdir pre_model_qed/
+* CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.qed --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_qed/
+* mkdir vae_model_qed/
+* CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.qed --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_qed/model.best --save_dir vae_model_qed/
+
+
+## train drd2
+
+* mkdir pre_model_drd2/
+* CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_drd2/
+* mkdir vae_model_drd2/
+* CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_drd2/model.best --save_dir vae_model_drd2/
