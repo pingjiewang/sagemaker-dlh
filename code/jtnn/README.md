@@ -16,7 +16,7 @@ Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](
 # Quick Start
 The following directories contains the most up-to-date implementations of our model:
 * `fast_jtnn/` contains codes for model implementation.
-* `fast_molvae/` contains codes for VAE training. Please refer to `fast_molvae/README.md` for details.
+* `molopt/` contains codes for VAE training. Please refer to `molopt/README.md` for details.
 
 The following directories provides scripts for the experiments in our original ICML paper:
 * `bo/` includes scripts for Bayesian optimization experiments. Please read `bo/README.md` for details.
@@ -31,7 +31,7 @@ Original Readme:
 https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * source activate test_dlh_1
 * export PYTHONPATH=~/sagemaker-dlh/code/jtnn
-* cd ~/sagemaker-dlh/code/jtnn/fast_molopt
+* cd ~/sagemaker-dlh/code/jtnn/molopt
 
 ## train penalized logP
 
