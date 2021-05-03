@@ -82,7 +82,7 @@ for epoch in xrange(MAX_EPOCH):
             assm_acc = assm_acc / PRINT_ITER * 100
             steo_acc = steo_acc / PRINT_ITER * 100
             prop_acc = prop_acc / PRINT_ITER
-
+            print("peter test loss:", loss.item())
             print "KL: %.1f, Word: %.2f, Topo: %.2f, Assm: %.2f, Steo: %.2f, Prop: %.4f" % (kl_div, word_acc, topo_acc, assm_acc, steo_acc, prop_acc)
             word_acc,topo_acc,assm_acc,steo_acc,prop_acc = 0,0,0,0,0
             sys.stdout.flush()

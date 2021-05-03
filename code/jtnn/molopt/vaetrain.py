@@ -133,3 +133,4 @@ for epoch in xrange(MAX_EPOCH):
     torch.save(model.state_dict(), opts.save_path + "/model.iter-" + str(epoch))
 print "Finished!"
 print "total time (s): " + str(total_time)
+

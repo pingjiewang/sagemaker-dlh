@@ -39,7 +39,22 @@ def fingerprints_from_mol(mol):
     return nfp
 
 
-with open('train.txt', 'r') as f:
-    with open('train.drd2', 'w') as w:
+#with open('train.txt', 'r') as f:
+#    with open('train.drd2', 'w') as w:
+#        for line in f:
+#            w.write(str(get_score(line.split()[0]))+'\n')
+
+with open('valid.txt', 'r') as f:
+    with open('opt.valid.drd2', 'w') as w:
         for line in f:
-            w.write(str(get_score(line.split()[0]))+'\n')
+            w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
+
+with open('test.txt', 'r') as f:
+    with open('opt.test.drd2', 'w') as w:
+        for line in f:
+            w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
+
+#with open('all.txt', 'r') as f:
+#    with open('opt.all.drd2', 'w') as w:
+#        for line in f:
+#            w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
