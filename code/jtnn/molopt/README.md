@@ -7,6 +7,7 @@
 * conda install scipy
 * export PYTHONPATH=/home/ubuntu/sagemaker-dlh/code/jtnn
 * cd molopt/
+* pip install wandb
 * python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt --hidden 420 --depth 3 --latent 56 --sim 0.2 --model joint-h420-L56-d3-beta0.005/model.iter-4
 
 # Constrained Molecule Optimization
