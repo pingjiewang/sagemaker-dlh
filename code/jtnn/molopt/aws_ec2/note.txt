@@ -1,0 +1,60 @@
+#login 
+ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-18-220-39-42.us-east-2.compute.amazonaws.com
+
+# Creating a smail dataset for testing AWS setup
+#
+cd ~/sagemaker-dlh/code/jtnn/data/zinc
+head -1100 train.txt > train_small.txt
+head -1100 train.logP-SA > train_small.logP-SA
+head -1100 train.drd2 > train_small.drd2
+head -1100 train.qed > train_small.qed
+
+
+# pre-training (small dataset)
+#
+
+source activate test_dlh_1
+
+export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+
+cd ~/sagemaker-dlh/code/jtnn/molopt
+
+mkdir pre_model_logp/
+CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train_small.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train_small.logP-SA \
+--hidden 300 --depth 3 --latent 56 --batch 40 \
+--save_dir pre_model_logp/
+
+
+
+# training (small dataset)
+
+source activate test_dlh_1
+export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+cd ~/sagemaker-dlh/code/jtnn/molopt
+
+mkdir vae_model_logp/
+CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train_small.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train_small.logP-SA \
+--hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 \
+--model pre_model_logp/model.iter-2 --save_dir vae_model_logp/
+
+# testing (small dataset)
+
+python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.6 \
+--model vae_model_logp/model.iter-2
+
+python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.4 \
+--model vae_model_logp/model.iter-2
+
+
+# validation (small dataset)
+
+
+python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.6\
+--model vae_model_logp/model.iter-2
+
+python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.4\
+--model vae_model_logp/model.iter-2
