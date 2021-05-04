@@ -46,8 +46,8 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * cd ~/sagemaker-dlh/code/jtnn/molopt
 
 ## Set up ENV variables for wandb
-export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
-export WANDB_PROJECT="jtnn_train"
+* export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+* export WANDB_PROJECT="jtnn_train"
 
 ## train penalized logP
 
