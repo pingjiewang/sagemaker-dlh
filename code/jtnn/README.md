@@ -66,3 +66,30 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_drd2/
 * mkdir vae_model_drd2/
 * CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_drd2/model.best --save_dir vae_model_drd2/
+
+
+## testing logP
+
+echo "Begin to test using --sim 0.6"
+python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.6 \
+--model vae_model_logp/model.iter-2
+
+echo "Begin to test using --sim 0.4"
+python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.4 \
+--model vae_model_logp/model.iter-2
+
+
+## validation logP
+
+echo "Begin to validate using --sim 0.6"
+python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.6\
+--model vae_model_logp/model.iter-2
+
+echo "Begin to validate using --sim 0.4"
+python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 --sim 0.4\
+--model vae_model_logp/model.iter-2
+
