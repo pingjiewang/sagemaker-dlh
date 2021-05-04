@@ -13,6 +13,18 @@ Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](
 * scikit-learn
 * networkx
 
+# To set up Conda env
+
+* conda create -n test python=2.7
+* conda activate test
+* conda install pytorch==0.4.1 cuda80 -c pytorch
+* conda install rdkit=2017.09.1 -c rdkit
+* conda install scipy
+* export PYTHONPATH=/home/ubuntu/sagemaker-dlh/code/jtnn
+* cd molopt/
+* pip install wandb
+* python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt --hidden 420 --depth 3 --latent 56 --sim 0.2 --model joint-h420-L56-d3-beta0.005/model.iter-4
+
 # Quick Start
 The following directories contains the most up-to-date implementations of our model:
 * `fast_jtnn/` contains codes for model implementation.
