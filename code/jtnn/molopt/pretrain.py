@@ -52,7 +52,7 @@ scheduler.step()
 dataset = PropDataset(opts.train_path, opts.prop_path)
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4, collate_fn=lambda x:x)
 
-MAX_EPOCH = 3
+MAX_EPOCH = 2
 PRINT_ITER = 20
 
 for epoch in xrange(MAX_EPOCH):

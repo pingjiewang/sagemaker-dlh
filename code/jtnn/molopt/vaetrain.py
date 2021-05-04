@@ -37,7 +37,7 @@ parser.add_option("-l", "--latent", dest="latent_size", default=56)
 parser.add_option("-d", "--depth", dest="depth", default=3)
 parser.add_option("-z", "--beta", dest="beta", default=1.0)
 parser.add_option("-q", "--lr", dest="lr", default=1e-3)
-parser.add_option("--epoch", dest="epoch", default=3)
+parser.add_option("--epoch", dest="epoch", default=2)
 opts,args = parser.parse_args()
    
 vocab = [x.strip("\r\n ") for x in open(opts.vocab_path)] 
