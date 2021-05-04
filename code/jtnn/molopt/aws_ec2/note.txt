@@ -1,5 +1,5 @@
 #login 
-ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-18-220-39-42.us-east-2.compute.amazonaws.com
+ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-18-219-171-83.us-east-2.compute.amazonaws.com
 
 # Creating a smail dataset for testing AWS setup
 #
@@ -9,11 +9,19 @@ head -1100 train.logP-SA > train_small.logP-SA
 head -1100 train.drd2 > train_small.drd2
 head -1100 train.qed > train_small.qed
 
+# Setting up the Conda Enviroment
+
+conda create -n jtnn_molopt python=2.7
+conda activate jtnn_molopt
+conda install -y pytorch==0.4.1 cuda80 -c pytorch
+conda install -y rdkit=2017.09.1 -c rdkit
+conda install -y scipy
+
 
 # pre-training (small dataset)
 #
 
-source activate test_dlh_1
+source activate jtnn_molopt
 
 export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 
@@ -31,7 +39,7 @@ CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train_small.txt -
 export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
 export WANDB_PROJECT="jtnn_logP_train"
 
-source activate test_dlh_1
+source activate jtnn_molopt
 export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 cd ~/sagemaker-dlh/code/jtnn/molopt
 
@@ -42,10 +50,15 @@ CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train_small.txt -
 
 # testing (small dataset)
 
+source activate jtnn_molopt
+export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+cd ~/sagemaker-dlh/code/jtnn/molopt
+
 echo "Begin to test using --sim 0.6"
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6 \
 --model vae_model_logp/model.iter-2
+
 
 echo "Begin to test using --sim 0.4"
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \

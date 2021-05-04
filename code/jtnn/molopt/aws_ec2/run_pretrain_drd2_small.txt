@@ -1,0 +1,59 @@
+#!/bin/bash
+
+#set EST time format
+timedatectl set-timezone America/New_York
+
+start_time=" [start-time]: "$(date)
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+file_run_log=molopt_pre_train_drd2_small$current_time-run.log
+
+#Log a special remark
+echo "Remark: " >> $file_run_log 2>&1
+echo "pre training molopt drd2 small dataset" >> $file_run_log 2>&1
+echo "" >> $file_run_log 2>&1
+
+su -l ubuntu -c '
+#
+# Wandb
+#export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+#export WANDB_PROJECT="jtnn_train"
+
+file_name="pre_train_drd2_small"
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+
+export file_train_log=$file_name-$current_time.log
+
+#
+source activate jtnn_molopt >> $file_train_log 2>&1
+
+export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+cd ~/sagemaker-dlh/code/jtnn/molopt
+
+mkdir pre_model_drd2/
+
+CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train_small.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train_small.drd2 \
+--hidden 300 --depth 3 --latent 56 --batch 40 \
+--save_dir pre_model_drd2/  >>  $file_train_log 2>&1
+
+#sync input from S3
+#aws s3 sync s3://input-data-drug-r-us/xx_processed/ ~/sagemaker-dlh/code/xx/data
+
+
+folder_name="pre_train_molopt_drd2_small_"$current_time
+
+aws s3 cp --recursive ./pre_model_drd2 s3://output-data-drug-r-us/molvae/pre_train_drd2_small/$folder_name/ 
+aws s3 cp --quiet $file_train_log      s3://output-data-drug-r-us/molvae/pre_train_drd2_small/$folder_name/
+
+#
+'  >> $file_run_log 2>&1
+
+end_time=" [..end-time]: "$(date)
+
+echo "" >> $file_run_log 2>&1
+uptime >> $file_run_log 2>&1
+echo $start_time >> $file_run_log 2>&1
+echo $end_time >> $file_run_log 2>&1
+
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
+
+shutdown now
