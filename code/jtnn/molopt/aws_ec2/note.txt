@@ -28,6 +28,9 @@ CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train_small.txt -
 
 # training (small dataset)
 
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="jtnn_logP_train"
+
 source activate test_dlh_1
 export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 cd ~/sagemaker-dlh/code/jtnn/molopt
@@ -39,10 +42,12 @@ CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train_small.txt -
 
 # testing (small dataset)
 
+echo "Begin to test using --sim 0.6"
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6 \
 --model vae_model_logp/model.iter-2
 
+echo "Begin to test using --sim 0.4"
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.4 \
 --model vae_model_logp/model.iter-2
@@ -50,11 +55,12 @@ python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/voc
 
 # validation (small dataset)
 
-
+echo "Begin to validate using --sim 0.6"
 python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6\
 --model vae_model_logp/model.iter-2
 
+echo "Begin to validate using --sim 0.4"
 python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.4\
 --model vae_model_logp/model.iter-2
