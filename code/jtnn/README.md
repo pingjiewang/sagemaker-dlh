@@ -37,13 +37,17 @@ The following directories provides scripts for the experiments in our original I
 * `jtnn/` contains codes for model formulation.
 * `data/` ZINC training data for smiles and properties
 
-## Steps
+# Steps
 
 Original Readme:
 https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * source activate test_dlh_1
 * export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 * cd ~/sagemaker-dlh/code/jtnn/molopt
+
+## Set up ENV variables for wandb
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="jtnn_train"
 
 ## train penalized logP
 
