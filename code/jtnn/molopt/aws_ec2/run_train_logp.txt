@@ -1,0 +1,58 @@
+#!/bin/bash
+
+#set EST time format
+timedatectl set-timezone America/New_York
+
+start_time=" [start-time]: "$(date)
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+file_run_log=molopt_train_logp_$current_time-run.log
+
+#Log a special remark
+echo "Remark: " >> $file_run_log 2>&1
+echo "Training molopt logp dataset" >> $file_run_log 2>&1
+echo "" >> $file_run_log 2>&1
+
+su -l ubuntu -c '
+#
+# Wandb
+export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
+export WANDB_PROJECT="jtnn_logp_train"
+
+file_name="train_logp"
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+
+export file_train_log=$file_name-$current_time.log
+
+#
+source activate jtnn_molopt >> $file_train_log 2>&1
+
+export PYTHONPATH=~/sagemaker-dlh/code/jtnn
+cd ~/sagemaker-dlh/code/jtnn/molopt
+
+# fetch pre-trained files from s3
+aws s3 sync s3://final-data-drug-r-us/pre_train  ~/sagemaker-dlh/code/jtnn/molopt >> $file_train_log 2>&1
+
+mkdir vae_model_logp/
+CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.logP-SA \
+--hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 \
+--model pre_model_logp/model.iter-1 --save_dir vae_model_logp/ >> $file_train_log 2>&1
+
+
+folder_name="vae_model_logp_"$current_time
+
+aws s3 cp --recursive ./vae_model_logp s3://output-data-drug-r-us/molvae/train/$folder_name/ 
+aws s3 cp --quiet $file_train_log      s3://output-data-drug-r-us/molvae/train/$folder_name/
+
+#
+'  >> $file_run_log 2>&1
+
+end_time=" [..end-time]: "$(date)
+
+echo "" >> $file_run_log 2>&1
+uptime >> $file_run_log 2>&1
+echo $start_time >> $file_run_log 2>&1
+echo $end_time >> $file_run_log 2>&1
+
+aws s3 cp --quiet $file_run_log s3://output-data-drug-r-us
+
+shutdown now
