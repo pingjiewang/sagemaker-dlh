@@ -9,8 +9,12 @@ from collections import deque
 import rdkit
 import rdkit.Chem as Chem
 from rdkit.Chem import Descriptors
+from rdkit import DataStructs
+import sklearn
+from sklearn import svm
+import os.path as op
 import sascorer
-
+import pickle
 from jtnn import *
 """Scores based on an ECFP classifier for activity."""
 
