@@ -8,6 +8,7 @@ from collections import deque
 
 import rdkit
 import rdkit.Chem as Chem
+from rdkit.Chem import QED
 from rdkit.Chem import Descriptors
 import sascorer
 
@@ -52,8 +53,8 @@ with open(opts.test_path) as f:
 
 res = []
 for smiles in data:
-    mol = Chem.MolFromSmiles(smiles)
-    score = qed(mol)
+    #mol = Chem.MolFromSmiles(smiles)
+    score = qed(smiles)
 
     new_smiles,sim = model.optimize(smiles, sim_cutoff=sim_cutoff, lr=2, num_iter=80)
     new_mol = Chem.MolFromSmiles(new_smiles)
