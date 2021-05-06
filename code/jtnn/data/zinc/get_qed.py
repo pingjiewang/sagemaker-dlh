@@ -14,12 +14,12 @@ def qed(s):
 #    with open('train.qed', 'w') as w:
 #        for line in f:
 #            w.write(str(qed(line.split()[0]))+'\n')
-with open('valid.txt', 'r') as f:
+with open('valid.qed.txt', 'r') as f:
     with open('opt.valid.qed', 'w') as w:
         for line in f:
             w.write(line.split()[0]+' '+str(qed(line.split()[0]))+'\n')
 
-with open('test.txt', 'r') as f:
-    with open('opt.test.qed', 'w') as w:
-        for line in f:
-            w.write(line.split()[0]+' '+str(qed(line.split()[0]))+'\n')
+#with open('test.txt', 'r') as f:
+#    with open('opt.test.qed', 'w') as w:
+#        for line in f:
+#            w.write(line.split()[0]+' '+str(qed(line.split()[0]))+'\n')

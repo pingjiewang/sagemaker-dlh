@@ -44,15 +44,15 @@ def fingerprints_from_mol(mol):
 #        for line in f:
 #            w.write(str(get_score(line.split()[0]))+'\n')
 
-with open('valid.txt', 'r') as f:
+with open('valid.drd2.txt', 'r') as f:
     with open('opt.valid.drd2', 'w') as w:
         for line in f:
             w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
 
-with open('test.txt', 'r') as f:
-    with open('opt.test.drd2', 'w') as w:
-        for line in f:
-            w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
+#with open('test.txt', 'r') as f:
+#    with open('opt.test.drd2', 'w') as w:
+#        for line in f:
+#            w.write(line.split()[0]+' '+str(get_score(line.split()[0]))+'\n')
 
 #with open('all.txt', 'r') as f:
 #    with open('opt.all.drd2', 'w') as w:
