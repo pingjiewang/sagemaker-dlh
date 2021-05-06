@@ -1,5 +1,5 @@
 #login 
-ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-18-219-171-83.us-east-2.compute.amazonaws.com
+ssh -i ~/.ssh/dlh-group-pair.pem ubuntu@ec2-52-15-122-64.us-east-2.compute.amazonaws.com
 
 # Creating a smail dataset for testing AWS setup
 #
@@ -48,32 +48,34 @@ CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train_small.txt -
 --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 \
 --model pre_model_logp/model.iter-2 --save_dir vae_model_logp/
 
-# testing (small dataset)
+
+# validation 
 
 source activate jtnn_molopt
 export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 cd ~/sagemaker-dlh/code/jtnn/molopt
 
-echo "Begin to test using --sim 0.6"
-python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+echo "Begin to validate logp06"
+python optimize.py --test ../data/zinc/opt.valid.logp_new --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6 \
---model vae_model_logp/model.iter-2
+--model vae_model_logp/model.iter-1
 
-
-echo "Begin to test using --sim 0.4"
-python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
+echo "Begin to validate logp04"
+python optimize.py --test ../data/zinc/opt.valid.logp_new --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.4 \
---model vae_model_logp/model.iter-2
+--model vae_model_logp/model.iter-1
+
+echo "Begin to validate qed"
+python optimize_qed.py --test ../data/zinc/opt.valid.qed --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 \
+--model vae_model_qed/model.iter-1
+
+echo "Begin to validate drd2"
+python optimize_drd2.py --test ../data/zinc/opt.valid.drd2 --vocab ../data/zinc/vocab.txt \
+--hidden 300 --depth 3 --latent 56 \
+--model vae_model_drd2/model.iter-1
 
 
-# validation (small dataset)
+# s3
 
-echo "Begin to validate using --sim 0.6"
-python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
---hidden 300 --depth 3 --latent 56 --sim 0.6\
---model vae_model_logp/model.iter-2
-
-echo "Begin to validate using --sim 0.4"
-python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
---hidden 300 --depth 3 --latent 56 --sim 0.4\
---model vae_model_logp/model.iter-2
+aws s3 cp --recursive ./train s3://final-data-drug-r-us/train

@@ -1,3 +1,9 @@
+validate_test: 
+	aws ec2 run-instances \
+		--launch-template LaunchTemplateId=lt-0a9f85a28214b65e2 \
+		--instance-type g4dn.xlarge 
+
+
 train_logp: 
 	aws ec2 run-instances \
 		--launch-template LaunchTemplateId=lt-0a9f85a28214b65e2 \
@@ -81,3 +87,6 @@ sync:
 
 s3_fetch_pre_train:
 	aws s3 sync s3://final-data-drug-r-us/pre_train  .
+
+s3_fetch_train:
+	aws s3 sync s3://final-data-drug-r-us/train  .
