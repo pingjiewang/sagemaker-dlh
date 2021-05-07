@@ -57,8 +57,9 @@ for smiles in data:
     score = qed(smiles)
 
     new_smiles,sim = model.optimize(smiles, sim_cutoff=sim_cutoff, lr=2, num_iter=80)
-    new_mol = Chem.MolFromSmiles(new_smiles)
-    new_score = qed(new_mol)
+    #new_mol = Chem.MolFromSmiles(new_smiles)
+    
+    new_score = qed(new_smiles)
 
     res.append( (new_score - score, sim, score, new_score, smiles, new_smiles) )
     print new_score - score, sim, score, new_score, smiles, new_smiles
