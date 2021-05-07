@@ -8,6 +8,8 @@ from collections import deque
 
 import rdkit
 import rdkit.Chem as Chem
+import numpy as np
+from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors
 from rdkit import DataStructs
 import sklearn
@@ -78,12 +80,12 @@ with open(opts.test_path) as f:
 
 res = []
 for smiles in data:
-    mol = Chem.MolFromSmiles(smiles)
-    score = get_score(mol)
+    #mol = Chem.MolFromSmiles(smiles)
+    score = get_score(smiles)
 
     new_smiles,sim = model.optimize(smiles, sim_cutoff=sim_cutoff, lr=2, num_iter=80)
-    new_mol = Chem.MolFromSmiles(new_smiles)
-    new_score = get_score(new_mol)
+    #new_mol = Chem.MolFromSmiles(new_smiles)
+    new_score = get_score(new_smiles)
 
     res.append( (new_score - score, sim, score, new_score, smiles, new_smiles) )
     print new_score - score, sim, score, new_score, smiles, new_smiles
