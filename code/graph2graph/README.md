@@ -24,3 +24,13 @@ A quick summary of different folders:
 
 new:
 * `data_small/` contains a small subset of training, validation and test set of logP, QED and DRD2 for testing purposes.
+
+# Train the models
+
+* LogP06 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_1_of_4.txt
+
+* LogP04 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_2_of_4.txt
+
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_3_of_4.txt
+
+* DRD2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_4_of_4.txt
