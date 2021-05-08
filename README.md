@@ -1,6 +1,18 @@
 # sagemaker-dlh
 
-a git repos for playing with AWS SageMaker
+This is a git repos for team drugsrus to maintain the code for DLH project (2021 Spring).
+
+# Readme for JTNN
+
+https://github.com/pingjiewang/sagemaker-dlh/tree/main/code/graph2graph#readme
+
+# Readme for HierVAE
+
+https://github.com/pingjiewang/sagemaker-dlh/tree/main/code/hiervae#readme
+
+# Readme for JT-VAE
+
+https://github.com/pingjiewang/sagemaker-dlh/tree/main/code/jtnn#readme
 
 # Often used command
 
