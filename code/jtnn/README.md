@@ -23,7 +23,6 @@ Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](
 * export PYTHONPATH=/home/ubuntu/sagemaker-dlh/code/jtnn
 * cd molopt/
 * pip install wandb
-* python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt --hidden 420 --depth 3 --latent 56 --sim 0.2 --model joint-h420-L56-d3-beta0.005/model.iter-4
 
 # Quick Start
 The following directories contains the most up-to-date implementations of our model:
@@ -75,11 +74,13 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 ## testing logP
 
 echo "Begin to test using --sim 0.6"
+
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6 \
 --model vae_model_logp/model.iter-2
 
 echo "Begin to test using --sim 0.4"
+
 python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.4 \
 --model vae_model_logp/model.iter-2
@@ -88,11 +89,13 @@ python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/voc
 ## validation logP
 
 echo "Begin to validate using --sim 0.6"
+
 python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.6\
 --model vae_model_logp/model.iter-2
 
 echo "Begin to validate using --sim 0.4"
+
 python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vocab.txt \
 --hidden 300 --depth 3 --latent 56 --sim 0.4\
 --model vae_model_logp/model.iter-2
