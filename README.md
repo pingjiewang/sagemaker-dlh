@@ -4,6 +4,10 @@ We benchmark three state-of-the-art variational autoencoders (VAE) designed for 
 
 This git repo contains code that was used to perform our benchmark study for team Drugs"R"Us (DLH final project, 2021 Spring at UIUC). All models were retrained on AWS. Instructions for setting up each conda environment for successful model training can be found in the following readme's.
 
+# Final Report
+
+See `final_report.pdf`
+
 # Readme for JTNN
 
 https://github.com/pingjiewang/sagemaker-dlh/tree/main/code/graph2graph#readme
