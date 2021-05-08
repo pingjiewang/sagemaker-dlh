@@ -6,9 +6,6 @@
 - Graph2Graph
     * code: https://github.com/wengong-jin/iclr19-graph2graph
     * paper: https://arxiv.org/abs/1812.01070
-- CORE
-    * code: https://github.com/futianfan/CORE
-    * paper: https://ojs.aaai.org//index.php/AAAI/article/view/5404
 - HierVAE
     * code: https://github.com/wengong-jin/hgraph2graph
     * paper: https://arxiv.org/pdf/2002.03230.pdf
@@ -84,7 +81,6 @@ Now run the following steps:
 
 
 # HierVAE
-
 
 ## Training on real dataset (with GPU)
 
