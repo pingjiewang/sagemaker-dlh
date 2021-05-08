@@ -1,6 +1,8 @@
 # Background
 
-This is a git repos for team drugsrus to maintain the code for DLH project (2021 Spring).
+We benchmark three state-of-the-art variational autoencoders (VAE) designed for molecular optimization. Specifically, we reproduce the results of Jin et al. by retraining their VAEs -- the junction tree variational autoencoder (JT-VAE), the junction tree encoder-decoder with attention mechanism and graph-to-graph translation (JTNN), and the hierarchical junction tree encoder-decoder (HierVAE). The goal of these autoencoders is to efficiently generate new molecules with improved performance properties suitable for drug discovery applications. 
+
+This git repo contains code that was used to perform our benchmark study for team Drugs"R"Us (DLH final project, 2021 Spring at UIUC). All models were retrained on AWS. Instructions for setting up each conda environment for successful model training can be found in the following readme's.
 
 # Readme for JTNN
 
