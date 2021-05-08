@@ -1,4 +1,4 @@
-# sagemaker-dlh
+# Background
 
 This is a git repos for team drugsrus to maintain the code for DLH project (2021 Spring).
 
