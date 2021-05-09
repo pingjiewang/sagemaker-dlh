@@ -2,6 +2,18 @@
 
 This code has been copied from https://github.com/wengong-jin/hgraph2graph.
 
+
+
+# Installation
+First install the dependencies via conda:
+ * PyTorch >= 1.0.0
+ * networkx
+ * RDKit = 2018.09.3
+ * numpy
+ * Python >= 3.6
+
+And then run `pip install .`
+
 # To set up Conda ENV
 #building AMI image
 
@@ -25,21 +37,11 @@ cd /sagemaker-dlh/code/hiervae
 
 pip install wandb
 
-## Installation
-First install the dependencies via conda:
- * PyTorch >= 1.0.0
- * networkx
- * RDKit = 2018.09.3
- * numpy
- * Python >= 3.6
-
-And then run `pip install .`
-
-## Graph translation Data Format
+# Graph translation Data Format
 * The training file should contain pairs of molecules (molA, molB) that are similar to each other but molB has better chemical properties. Please see `data/qed/train_pairs.txt`.
 * The test file is a list of molecules to be optimized. Please see `data/qed/test.txt`.
 
-## Graph translation training procedure
+# Graph translation training procedure
 1. Extract substructure vocabulary from a given set of molecules:
 ```
 python get_vocab.py < data/qed/mols.txt > vocab.txt
