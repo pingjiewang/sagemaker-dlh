@@ -103,3 +103,15 @@ python gnn_train.py --train processed_qed/ --vocab data/qed/vocab.txt --save_dir
 ```
 python decode.py --test data/qed/valid.txt --vocab data/qed/vocab.txt --model models/model.5 --num_decode 20 > results.csv
 ```
+
+# Automation train scripts
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_train/run_train_qed.txt
+* Logp06 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_train/run_train_logp06.txt
+* Logp04 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_train/run_train_logp04.txt
+* Drd2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_train/run_train_drd2.txt
+
+# Automation validation scripts
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_validate/run_script_val_qed_test.txt
+* Logp06 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_validate/run_script_val_logp06_test.txt
+* Logp04 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_validate/run_script_val_logp04_test.txt
+* Drd2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/hiervae/aws_ec2_validate/run_script_val_drd2_test.txt
