@@ -2,6 +2,29 @@
 
 This code has been copied from https://github.com/wengong-jin/hgraph2graph.
 
+# To set up Conda ENV
+#building AMI image
+
+conda create -n hiervae1 python=3.7
+
+source activate hiervae1
+
+conda install numpy=1.19.1
+conda install -c rdkit rdkit=2019.03.4
+pip install networkx
+pip install props
+conda install -y pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
+
+
+conda install -y scikit-learn
+
+cd /sagemaker-dlh/code/hiervae
+
+#takes forever
+#pip install .
+
+pip install wandb
+
 ## Installation
 First install the dependencies via conda:
  * PyTorch >= 1.0.0
