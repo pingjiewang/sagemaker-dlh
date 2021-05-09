@@ -13,26 +13,39 @@ This code has been copied from https://github.com/wengong-jin/iclr19-graph2graph
 The code has been tested under python 2.7 with pytorch 0.4.1. 
 
 ## Set up Conda Env
+
 #create a new enviroment
+
 conda create -n test_dlh_1 python=2.7
 
 #activiate
+
 conda activate test_dlh_1
 
 
 #package installation
+
 conda install -y PyTorch=0.4.1 
+
 ( numpy-1.15.4  )
 
+
 conda install -y Scikit-learn
+
 (
+
     scikit-learn       conda-forge/linux-64::scikit-learn-0.20.3-py27ha8026db_1
+    
     scipy              conda-forge/linux-64::scipy-1.2.1-py27h921218d_2
+    
 )
 
 conda install -y -c rdkit rdkit
+
 (
+
   rdkit/linux-64::rdkit-2017.09.1-py27_1
+  
 )
 
 ## Quick Start
