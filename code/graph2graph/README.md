@@ -70,3 +70,14 @@ new:
 * Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_3_of_4.txt
 
 * DRD2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2/run_script_4_of_4.txt
+
+
+# Validation scripts
+
+* LogP06 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2_validate/run_script_val_logp06_iter_0_18.txt
+
+* LogP04 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2_validate/run_script_val_logp04_iter_0_18.txt
+
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2_validate/run_script_val_qed_iter_0_19.txt
+
+* DRD2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/graph2graph/aws_ec2_validate/run_script_val_drd2_iter_0_19.txt
