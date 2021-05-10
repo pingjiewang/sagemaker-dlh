@@ -6,10 +6,8 @@ This git repo contains code that was used to perform our benchmark study for tea
 
 # Final Report
 
-See `final_report.pdf`
-
-WandB Dashboard of our Select Trained Models
-[https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU](https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU)
+- See `final_report.pdf`
+- WandB Dashboard of our Select Trained Models: [https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU](https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU)
 
 
 # Readme for JTNN
