@@ -5,7 +5,7 @@ This code has been copied from https://github.com/wengong-jin/icml18-jtnn.
 Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](https://arxiv.org/abs/1802.04364)
 
 
-## Requirements
+# Requirements
 * Python == 2.7
 * RDKit >= 2017.09
 * PyTorch >= 0.4.0
@@ -44,18 +44,18 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * export PYTHONPATH=~/sagemaker-dlh/code/jtnn
 * cd ~/sagemaker-dlh/code/jtnn/molopt
 
-## Set up ENV variables for wandb
+# Set up ENV variables for wandb
 * export WANDB_API_KEY=3d8d03a861242e9da71d6eb9ce4b9299259d142c
 * export WANDB_PROJECT="jtnn_train"
 
-## train penalized logP
+# train penalized logP
 
 * mkdir pre_model_logP/
 * CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.logP-SA --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_logP/
 * mkdir vae_model_logP/
 * CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.logP-SA --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_logP/model.best --save_dir vae_model_logP/
 
-## train qed
+# train qed
 
 * mkdir pre_model_qed/
 * CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.qed --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_qed/
@@ -63,7 +63,7 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.qed --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_qed/model.best --save_dir vae_model_qed/
 
 
-## train drd2
+# train drd2
 
 * mkdir pre_model_drd2/
 * CUDA_VISIBLE_DEVICES=0 python pretrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --save_dir pre_model_drd2/
@@ -71,7 +71,7 @@ https://github.com/wengong-jin/icml18-jtnn/tree/master/molopt
 * CUDA_VISIBLE_DEVICES=0 python vaetrain.py --train ../data/zinc/train.txt --vocab ../data/zinc/vocab.txt --prop ../data/zinc/train.drd2 --hidden 300 --depth 3 --latent 56 --batch 40 --lr 0.0007 --beta 0.005 --model pre_model_drd2/model.best --save_dir vae_model_drd2/
 
 
-## testing logP
+# testing logP
 
 echo "Begin to test using --sim 0.6"
 
@@ -86,7 +86,7 @@ python optimize.py --test ../data/zinc/opt.test.logP-SA --vocab ../data/zinc/voc
 --model vae_model_logp/model.iter-2
 
 
-## validation logP
+# validation logP
 
 echo "Begin to validate using --sim 0.6"
 
