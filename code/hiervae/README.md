@@ -26,7 +26,6 @@ pip install networkx
 pip install props
 conda install -y pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
 conda install -y scikit-learn
-cd /sagemaker-dlh/code/hiervae
 pip install wandb
 export PYTHONPATH=/sagemaker-dlh/code/hiervae
 ```
