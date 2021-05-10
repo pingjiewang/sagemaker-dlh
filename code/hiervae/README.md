@@ -26,14 +26,10 @@ pip install networkx
 pip install props
 conda install -y pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
 conda install -y scikit-learn
-```
-
 cd /sagemaker-dlh/code/hiervae
-
-#takes forever
-#pip install .
-
 pip install wandb
+export PYTHONPATH=/sagemaker-dlh/code/hiervae
+```
 
 # Graph translation Data Format
 * The training file should contain pairs of molecules (molA, molB) that are similar to each other but molB has better chemical properties. Please see `data/qed/train_pairs.txt`.
