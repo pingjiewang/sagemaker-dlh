@@ -15,14 +15,16 @@ Junction Tree Variational Autoencoder paper: [https://arxiv.org/abs/1802.04364](
 
 # To set up Conda env
 
-* conda create -n test python=2.7
-* conda activate test
-* conda install pytorch==0.4.1 cuda80 -c pytorch
-* conda install rdkit=2017.09.1 -c rdkit
-* conda install scipy
-* export PYTHONPATH=/home/ubuntu/sagemaker-dlh/code/jtnn
-* cd molopt/
-* pip install wandb
+```
+conda create -n test python=2.7
+conda activate test
+conda install pytorch==0.4.1 cuda80 -c pytorch
+conda install rdkit=2017.09.1 -c rdkit
+conda install scipy
+export PYTHONPATH=/home/ubuntu/sagemaker-dlh/code/jtnn
+cd molopt/
+pip install wandb
+```
 
 # Quick Start
 The following directories contains the most up-to-date implementations of our model:
