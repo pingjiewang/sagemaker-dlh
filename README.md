@@ -8,6 +8,10 @@ This git repo contains code that was used to perform our benchmark study for tea
 
 See `final_report.pdf`
 
+Log in WandB
+[https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU](https://wandb.ai/peterzhang/drugsrus/reports/Wandb-Reports-A-benchmark-study-for-molecular-optimization--Vmlldzo2Njk1MzU)
+
+
 # Readme for JTNN
 
 https://github.com/pingjiewang/sagemaker-dlh/tree/main/code/graph2graph#readme
