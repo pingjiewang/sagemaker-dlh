@@ -22,6 +22,7 @@ conda activate test_dlh_1
 conda install -y pytorch=0.4.1 
 conda install -y scikit-learn=0.20.3 scipy=1.2.1
 conda install -y -c rdkit rdkit=2017.09.1
+export PYTHONPATH=/sagemaker-dlh/code/graph2graph
 ```
 
 ## Quick Start
