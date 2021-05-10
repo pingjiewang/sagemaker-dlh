@@ -100,3 +100,12 @@ python optimize.py --test ../data/zinc/opt.valid.logP-SA --vocab ../data/zinc/vo
 --hidden 300 --depth 3 --latent 56 --sim 0.4\
 --model vae_model_logp/model.iter-2
 
+# Automation pretrain script
+* Drd2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_pretrain_drd2.txt
+* Logp https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_pretrain_logp.txt
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_pretrain_qed.txt
+
+# Automation train / validation / test script
+* Drd2 https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_train_drd2.txt
+* Logp https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_train_logp.txt
+* Qed https://github.com/pingjiewang/sagemaker-dlh/blob/main/code/jtnn/molopt/aws_ec2/run_train_qed.txt
